@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Error</title>
+</head>
+<body>
+    <a href="/"> <button>Home Page</button> </a>
+    <h1 style="color: red;">An Error Occurred</h1>
+    <p>{{ error_message }}</p>
+    <button onclick="goBack()">Back</button>
+
+    <script>
+    function goBack() {
+    window.history.back();
+    }
+    </script>
+
+</body>
+</html>

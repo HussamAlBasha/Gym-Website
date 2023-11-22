@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Trainer Information{% endblock %}
+
+
+{% block content %}
+    <br>
+    <h1>Get Trainer Information</h1>
+    <td>	 
+        <form action="" method="POST">
+            <br>  Enter a Trainer ID: <br>
+            <br><input type="number" name="pid" min="1" required><br>
+            <br><input class="custom-button" type="submit" value="Submit ID"><br>
+        </form> 
+    </td>
+
+    <ul>
+        <br>
+        <li> The name of the trainer: <span style="color: #2980b9;">{{t_name}}</span></li><br>
+        <li> The phone number of the trainer: <span style="color: #2980b9;">{{t_phone_num}}</span></li><br>
+        <li> The Email of the trainer: <span style="color: #2980b9;">{{t_email}}</span></li><br>
+        <li> The date of birth of the trainer: <span style="color: #2980b9;">{{t_dob}}</span></li><br>
+        <li> The salary of the trainer: <span style="color: #2980b9;">{{t_salary}}</span></li><br>
+        
+    </ul>  
+
+    <button class="custom-button" onclick="location.href='/trainer'">Back</button>
+
+{% endblock %}

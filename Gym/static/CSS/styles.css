@@ -1,0 +1,144 @@
+/* Fit Fusion Gym CSS Template with Bootstrap*/
+
+/* Primary color variables */
+:root {
+    --primary-color: #E47A2E;
+    /* Vibrant orange from the logo */
+    --accent-color: #000;
+    /* Black for contrast */
+    --background-color: #f4f4f4;
+    /* Light grey background */
+}
+
+/* Base font settings */
+body {
+    font-family: 'Arial', sans-serif;
+    color: var(--accent-color);
+    background-color: var(--background-color);
+    line-height: 1.6;
+}
+
+
+/* Header styling */
+.header {
+    background: var(--primary-color);
+    color: #fff;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+/* Navigation bar styling with Bootstrap classes */
+.navbar-custom {
+    background-color: var(--accent-color);
+}
+
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-nav .nav-link {
+    color: #fff;
+}
+
+.navbar-custom .navbar-nav .nav-link:hover,
+.navbar-custom .navbar-nav .nav-link:focus {
+    color: var(--primary-color);
+    background-color: transparent;
+}
+
+/* Main content area */
+.main {
+    padding: 1rem;
+}
+
+/* Footer styling */
+.footer {
+    background: var(--accent-color);
+    color: #fff;
+    text-align: center;
+    padding: 1rem 0;
+}
+
+/* Button styling with Bootstrap btn classes */
+.btn-custom {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: #fff;
+}
+
+.btn-custom:hover {
+    background-color: darken(var(--primary-color), 10%);
+    border-color: darken(var(--primary-color), 10%);
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--accent-color);
+}
+
+/* Bootstrap table styling */
+.table-custom {
+    margin-bottom: 1rem;
+}
+
+.table-custom thead th {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.table-custom tbody tr:hover {
+    background-color: rgba(228, 122, 46, 0.1);
+}
+
+/* Card component with Bootstrap card class */
+.card-custom {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card-custom img {
+    max-width: 100%;
+    border-radius: 5px;
+}
+
+/* Responsive table wrapper */
+.table-responsive-custom {
+    overflow-x: auto;
+}
+
+/* Media queries for responsive design */
+@media (max-width: 992px) {
+    .navbar-custom .navbar-nav .nav-link {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar-custom .navbar-collapse {
+        margin-top: 1rem;
+    }
+
+    .table-responsive-custom {
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* Hussam */
+.custom-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #3498db;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 5px; /* Add margin between buttons for better spacing on small screens */
+}
+
+.custom-button:hover {
+    background-color: #2980b9;
+}
+

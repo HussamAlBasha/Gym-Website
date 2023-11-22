@@ -1,0 +1,496 @@
+{% extends "base.html" %}
+{% block title %}Page A{% endblock %}
+
+{% block h1 %}All Tables Page{% endblock %}
+
+{% block content %}
+   
+
+   <table class="table table-bordered" style="width:auto;">
+
+      <!-- Assigned to Table -->
+      <tr>
+         <td>
+            <h3>Table 1: Assigned to Table</h3>
+            <table class="table table-bordered" style="width:auto; border:double;">
+               <thead>
+                  <td>Member ID</td>
+                  <td>Trainer ID</td>
+                  <td>Cost</td>
+               </thead>
+               
+               {% for row in rows_assigned_to %}
+                  <tr>
+                     <td>{{ row[0] }}</td>
+                     <td>{{ row[1] }}</td>
+                     <td>{{ row[2] }}</td>
+                  </tr>
+               {% endfor %}
+            </table>
+         </td>
+      
+         <!-- Buys Table -->
+         <td>
+            <h3>Table 2: Buys Table</h3>
+            <table class="table table-bordered" style="width:auto; border:double;">
+               <thead>
+                  <td>Member ID</td>
+                  <td>Barcode</td>
+                  <td>Quantity</td>
+                  <td>Purchase Date</td>
+               </thead>
+               
+               {% for row in rows_buys %}
+                  <tr>
+                     <td>{{ row[0] }}</td>
+                     <td>{{ row[1] }}</td>
+                     <td>{{ row[2] }}</td>
+                     <td>{{ row[3] }}</td>
+                  </tr>
+               {% endfor %}
+            </table>
+         </td>
+
+      </tr>
+      
+      <!-- Class Table -->
+      <tr>
+         <td>
+            <h3>Table 3: Class Table</h3>
+            <table class="table table-bordered" style="width:auto; border:double;">
+               <thead>
+                  <td>Class ID</td>
+                  <td>Trainer ID</td>
+                  <td>Class Name</td>
+                  <td>Class Date</td>
+                  <td>Class Start Time</td>
+                  <td>Class End Time</td>
+                  <td>Start Date</td>
+                  <td>End Date</td>
+               </thead>
+               
+               {% for row in rows_class %}
+                  <tr>
+                     <td>{{ row[0] }}</td>
+                     <td>{{ row[1] }}</td>
+                     <td>{{ row[2] }}</td>
+                     <td>{{ row[3] }}</td>
+                     <td>{{ row[4] }}</td>
+                     <td>{{ row[5] }}</td>
+                     <td>{{ row[6] }}</td>
+                     <td>{{ row[7] }}</td>
+                  </tr>
+               {% endfor %}
+            </table>
+         </td>
+      
+         <!-- Cleaning Company Table -->
+         <td>
+            <h3>Table 4: Cleaning Company Table</h3>
+            <table class="table table-bordered" style="width:auto; border:double;">
+               <thead>
+                  <td>Cleaning Company ID</td>
+                  <td>Phone Number</td>
+                  <td>Company Name</td>
+               </thead>
+               
+               {% for row in rows_cleaning_company %}
+                  <tr>
+                     <td>{{ row[0] }}</td>
+                     <td>{{ row[1] }}</td>
+                     <td>{{ row[2] }}</td>
+                  </tr>
+               {% endfor %}
+            </table>
+         </td>
+      </tr>
+      
+      <!-- Cleans Table -->
+      <tr>
+         <td>
+            <h3>Table 5: Cleans Table</h3>
+            <table class="table table-bordered" style="width:auto; border:double;">
+               <thead>
+                  <td>Cleaning Company ID</td>
+                  <td>Room ID</td>
+                  <td>Cleaning Cost</td>
+                  <td>Cleaning Date</td>
+               </thead>
+               
+               {% for row in rows_cleans %}
+                  <tr>
+                     <td>{{ row[0] }}</td>
+                     <td>{{ row[1] }}</td>
+                     <td>{{ row[2] }}</td>
+                     <td>{{ row[3] }}</td>
+                  </tr>
+               {% endfor %}
+            </table>
+         </td>
+      
+         <!-- Defect Table -->
+         <td>
+            <h3>Table 6: Defect Table</h3>
+            <table class="table table-bordered" style="width:auto; border:double;">
+               <thead>
+                  <td>Equipment ID</td>
+                  <td>Defect Number</td>
+                  <td>Maintenance Company ID</td>
+                  <td>Defect Description</td>
+                  <td>Defect Date</td>
+                  <td>Fixed Cost</td>
+                  <td>Defect Status</td>
+                  <td>Fixing Date</td>
+               </thead>
+               
+               {% for row in rows_defect %}
+                  <tr>
+                     <td>{{ row[0] }}</td>
+                     <td>{{ row[1] }}</td>
+                     <td>{{ row[2] }}</td>
+                     <td>{{ row[3] }}</td>
+                     <td>{{ row[4] }}</td>
+                     <td>{{ row[5] }}</td>
+                     <td>{{ row[6] }}</td>
+                     <td>{{ row[7] }}</td>
+                  </tr>
+               {% endfor %}
+            </table>
+         </td>
+      </tr>
+      
+      <!-- Enrolls Table -->
+      <tr>
+         <td>
+            <h3>Table 7: Enrolls Table</h3>
+            <table class="table table-bordered" style="width:auto; border:double;">
+               <thead>
+                  <td>Member ID</td>
+                  <td>Class ID</td>
+                  <td>Enrollment Cost</td>
+               </thead>
+               
+               {% for row in rows_enrolls %}
+                  <tr>
+                     <td>{{ row[0] }}</td>
+                     <td>{{ row[1] }}</td>
+                     <td>{{ row[2] }}</td>
+                  </tr>
+               {% endfor %}
+            </table>
+         </td>
+      
+         <!-- Equipment Table -->
+         <td>
+            <h3>Table 8: Equipment Table</h3>
+            <table class="table table-bordered" style="width:auto; border:double;">
+               <thead>
+                  <td>Equipment ID</td>
+                  <td>Equipment Name</td>
+                  <td>Purchase Date</td>
+                  <td>Company Phone Number</td>
+                  <td>Company Name</td>
+               </thead>
+               
+               {% for row in rows_equipment %}
+                  <tr>
+                     <td>{{ row[0] }}</td>
+                     <td>{{ row[1] }}</td>
+                     <td>{{ row[2] }}</td>
+                     <td>{{ row[3] }}</td>
+                     <td>{{ row[4] }}</td>
+                  </tr>
+               {% endfor %}
+            </table>
+         </td>
+      </tr>
+      
+      <!-- Feedback Table -->
+      <tr>
+         <td>
+            <h3>Table 9: Feedback Table</h3>
+            <table class="table table-bordered" style="width:auto; border:double;">
+               <thead>
+                  <td>Feedback ID</td>
+                  <td>Member ID</td>
+                  <td>Feedback Text</td>
+                  <td>Feedback Date</td>
+                  <td>Resolution Status</td>
+               </thead>
+               
+               {% for row in rows_feedback %}
+                  <tr>
+                     <td>{{ row[0] }}</td>
+                     <td>{{ row[1] }}</td>
+                     <td>{{ row[2] }}</td>
+                     <td>{{ row[3] }}</td>
+                     <td>{{ row[4] }}</td>
+                  </tr>
+               {% endfor %}
+            </table>
+         </td>
+      
+         <!-- Guest Table -->
+         <td>
+            <h3>Table 10: Guest Table</h3>
+            <table class="table table-bordered" style="width:auto; border:double;">
+               <thead>
+                  <td>Member ID</td>
+                  <td>Guest Name</td>
+                  <td>Guest Date of Birth</td>
+                  <td>Guest Gender</td>
+                  <td>Guest Relationship</td>
+               </thead>
+               
+               {% for row in rows_guest %}
+                  <tr>
+                     <td>{{ row[0] }}</td>
+                     <td>{{ row[1] }}</td>
+                     <td>{{ row[2] }}</td>
+                     <td>{{ row[3] }}</td>
+                     <td>{{ row[4] }}</td>
+                  </tr>
+               {% endfor %}
+            </table>
+         </td>
+      </tr>
+      
+      <!-- Maintenance Company Table -->
+      <tr>
+         <td>
+            <h3>Table 11: Maintenance Company Table</h3>
+            <table class="table table-bordered" style="width:auto; border:double;">
+               <thead>
+                  <td>Maintenance Company ID</td>
+                  <td>Phone Number</td>
+                  <td>Company Name</td>
+               </thead>
+               
+               {% for row in rows_maintenance_company %}
+                  <tr>
+                     <td>{{ row[0] }}</td>
+                     <td>{{ row[1] }}</td>
+                     <td>{{ row[2] }}</td>
+                  </tr>
+               {% endfor %}
+            </table>
+         </td>
+      
+         <!-- Member Table -->
+         <td>
+            <h3>Table 12: Member Table</h3>
+            <table class="table table-bordered" style="width:auto; border:double;">
+               <thead>
+                  <td>Member ID</td>
+                  <td>Phone Number</td>
+                  <td>Email</td>
+                  <td>Name</td>
+                  <td>Gender</td>
+                  <td>Locker Number</td>
+                  <td>Date of Birth</td>
+                  <td>State</td>
+                  <td>City</td>
+                  <td>Street</td>
+               </thead>
+               
+               {% for row in rows_member %}
+                  <tr>
+                     <td>{{ row[0] }}</td>
+                     <td>{{ row[1] }}</td>
+                     <td>{{ row[2] }}</td>
+                     <td>{{ row[3] }}</td>
+                     <td>{{ row[4] }}</td>
+                     <td>{{ row[5] }}</td>
+                     <td>{{ row[6] }}</td>
+                     <td>{{ row[7] }}</td>
+                     <td>{{ row[8] }}</td>
+                     <td>{{ row[9] }}</td>
+                  </tr>
+               {% endfor %}
+            </table>
+         </td>
+      </tr>
+      
+      <!-- Member Emergency Contact Table -->
+      <tr>
+         <td>
+            <h3>Table 13: Member Emergency Contact Table</h3>
+            <table class="table table-bordered" style="width:auto; border:double;">
+               <thead>
+                  <td>Member ID</td>
+                  <td>Emergency Contact</td>
+               </thead>
+               
+               {% for row in rows_emergency_contact %}
+                  <tr>
+                     <td>{{ row[0] }}</td>
+                     <td>{{ row[1] }}</td>
+                  </tr>
+               {% endfor %}
+            </table>
+         </td>
+      
+         <!-- Membership Table -->
+         <td>
+            <h3>Table 14: Membership Table</h3>
+            <table class="table table-bordered" style="width:auto; border:double;">
+               <thead>
+                  <td>Membership Name</td>
+                  <td>Membership Price</td>
+                  <td>Membership Duration</td>
+               </thead>
+               
+               {% for row in rows_membership %}
+                  <tr>
+                     <td>{{ row[0] }}</td>
+                     <td>{{ row[1] }}</td>
+                     <td>{{ row[2] }}</td>
+                  </tr>
+               {% endfor %}
+            </table>
+         </td>
+      </tr>
+      
+      <!-- Product Table -->
+      <tr>
+         <td>
+            <h3>Table 15: Product Table</h3>
+            <table class="table table-bordered" style="width:auto; border:double;">
+               <thead>
+                  <td>Barcode</td>
+                  <td>Product Type</td>
+                  <td>Product Name</td>
+                  <td>Product Price</td>
+                  <td>Product Quantity</td>
+               </thead>
+               
+               {% for row in rows_product %}
+                  <tr>
+                     <td>{{ row[0] }}</td>
+                     <td>{{ row[1] }}</td>
+                     <td>{{ row[2] }}</td>
+                     <td>{{ row[3] }}</td>
+                     <td>{{ row[4] }}</td>
+                  </tr>
+               {% endfor %}
+            </table>
+         </td>
+      
+         <!-- Require Table -->
+         <td>
+            <h3>Table 16: Require Table</h3>
+            <table class="table table-bordered" style="width:auto; border:double;">
+               <thead>
+                  <td>Class ID</td>
+                  <td>Equipment ID</td>
+               </thead>
+               
+               {% for row in rows_require %}
+                  <tr>
+                     <td>{{ row[0] }}</td>
+                     <td>{{ row[1] }}</td>
+                  </tr>
+               {% endfor %}
+            </table>
+         </td>
+      </tr>
+      
+      <!-- Room Table -->
+      <tr>
+         <td>
+            <h3>Table 17: Room Table</h3>
+            <table class="table table-bordered" style="width:auto; border:double;">
+               <thead>
+                  <td>Room ID</td>
+                  <td>Room Capacity</td>
+               </thead>
+               
+               {% for row in rows_room %}
+                  <tr>
+                     <td>{{ row[0] }}</td>
+                     <td>{{ row[1] }}</td>
+                  </tr>
+               {% endfor %}
+            </table>
+         </td>
+
+         <!-- Table 18: "Subscribe to" Table -->
+         <td>
+            <h3>Table 18: Subscribe to Table</h3>
+            <table class="table table-bordered" style="width:auto; border:double;">
+               <thead>
+                  <td>Member ID</td>
+                  <td>Membership Name</td>
+                  <td>Start Date</td>
+                  <td>End Date</td>
+                  <td>Payment Status</td>
+               </thead>
+         
+               {% for row in rows_subscribe_to %}
+                  <tr>
+                     <td>{{ row[0] }}</td>
+                     <td>{{ row[1] }}</td>
+                     <td>{{ row[3] }}</td>
+                     <td>{{ row[2] }}</td>
+                     <td>{{ row[4] }}</td>
+                  </tr>
+               {% endfor %}
+            </table>
+         </td>
+      </tr>    
+      
+      <tr>
+         <!-- Table 19: "Takes Place In" Table -->
+         <td>
+            <h3>Table 19: Takes Place In Table</h3>
+            <table class="table table-bordered" style="width:auto; border:double;">
+               <thead>
+                  <td>Class ID</td>
+                  <td>Class Name</td>
+                  <td>Date</td>
+                  <td>Start Time</td>
+                  <td>End Time</td>
+               </thead>
+         
+               {% for row in rows_takes_place_in %}
+                  <tr>
+                     <td>{{ row[0] }}</td>
+                     <td>{{ row[1] }}</td>
+                     <td>{{ row[2] }}</td>
+                     <td>{{ row[3] }}</td>
+                     <td>{{ row[4] }}</td>
+                  </tr>
+               {% endfor %}
+            </table>
+         </td>
+            
+         <!-- Table 20: "Trainer" Table -->
+         <td>
+            <h3>Table 20: Trainer Table</h3>
+            <table class="table table-bordered" style="width:auto; border:double;">
+               <thead>
+                  <td>Trainer ID</td>
+                  <td>Trainer Name</td>
+                  <td>Phone Number</td>
+                  <td>Email</td>
+                  <td>Date of Birth</td>
+                  <td>Salary</td>
+               </thead>
+         
+               {% for row in rows_trainer %}
+                  <tr>
+                     <td>{{ row[0] }}</td>
+                     <td>{{ row[1] }}</td>
+                     <td>{{ row[2] }}</td>
+                     <td>{{ row[3] }}</td>
+                     <td>{{ row[4] }}</td>
+                     <td>{{ row[5] }}</td>
+                  </tr>
+               {% endfor %}
+            </table>
+         </td>
+      </tr>
+
+      </tr>
+	</table>
+{% endblock %}
