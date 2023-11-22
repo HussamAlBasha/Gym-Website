@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}CQ1{% endblock %}
+
+
+{% block content %}
+    <br>
+    <h3>Find members enrolled in classes given by a specific trainer</h3>
+    <br>
+    <form action="" method="POST">
+    <label for="t_name">Trainer ID/Name:</label>
+    <select name="t_name" required>
+        {% for trainer in trainers %}
+            <option value="{{ trainer[1] }}">{{ trainer[0] }}/{{ trainer[1] }}</option>
+        {% endfor %}
+    </select><br><br>
+    <input class="custom-button"  type="submit" value="Find">
+</form>
+
+    <div class="main">
+        <div class="table-responsive-custom">
+            <table class="table-custom">
+                <thead>
+                    <tr>
+                        <th>Member Name</th>
+                        <th>Class Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in rows %}
+                        <tr>
+                            <td>{{ row[0] }}</td>
+                            <td>{{ row[1] }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+    <button class="custom-button" onclick="location.href='/'">Home Page</button>
+    
+{% endblock %}
