@@ -53,11 +53,12 @@
 <body>
 
     <div id="main-container">
+        <div class="button-container">
+            <button class="custom-button" onclick="location.href='/'">Home Page</button>
+        </div>
         <img src="{{ url_for('static', filename='images/trainer.png') }}" alt="A trainer">
 
         <div class="button-container">
-            <button class="custom-button" onclick="location.href='/'">Home Page</button>
-            <br>
             <button class="custom-button" onclick="location.href='/trainer/trainer_info'">Info about a Trainer</button>
             <button class="custom-button" onclick="location.href='/trainer/assigned_members'">Assigned Members</button>
             <button class="custom-button" onclick="location.href='/trainer/classes_given'">Classes Given by a Trainer</button>

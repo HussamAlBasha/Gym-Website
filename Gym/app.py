@@ -91,9 +91,9 @@ def classes_given():
             except psycopg2.Error as e:
                 return render_template("error.html", error_message=f"An unexpected error occurred: {e}")
         else:
-            return render_template("classes_given.html", members_list = "______")
+            return render_template("classes_given.html")
     else:
-        return render_template("classes_given.html", members_list = "______")
+        return render_template("classes_given.html")
     
 
 
