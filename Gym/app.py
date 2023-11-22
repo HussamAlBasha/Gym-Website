@@ -95,6 +95,38 @@ def classes_given():
     else:
         return render_template("classes_given.html")
     
+@app.route("/cq1", methods = ["Get", "Post"])
+def cq1():
+
+    cursor.execute('SELECT t_id, t_name	FROM "Trainer";')
+    trainers = cursor.fetchall()
+
+    if request.method == "POST":
+        t_name= request.form.get('t_name')
+        
+        cq1="""
+        SELECT "Member"."m_name", "Class"."class_name"
+        FROM "Member"
+        JOIN "Enrolls" ON "Member"."m_id" = "Enrolls"."e_m_id_fk"
+        JOIN "Class" ON "Enrolls"."e_class_id_fk" = "Class"."class_id"
+        WHERE "Class"."class_t_id_fk" = (
+        SELECT "t_id"
+        FROM "Trainer"
+        WHERE "t_name" = %s);
+        """  
+    
+        cursor.execute(cq1, (t_name,))
+        rows = cursor.fetchall()
+        if not rows:
+            return render_template("error.html", error_message="ID not found")
+            
+        return render_template("cq1.html", trainers=trainers, rows=rows)
+            
+    else:
+        return render_template("cq1.html", trainers=trainers)
+    
+
+    
 
 
 
