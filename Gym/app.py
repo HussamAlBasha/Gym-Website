@@ -126,11 +126,6 @@ def cq1():
         return render_template("cq1.html", trainers=trainers)
     
 
-    
-
-
-
-
 @app.route("/All") 
 def All():
     # "Assigned to" table

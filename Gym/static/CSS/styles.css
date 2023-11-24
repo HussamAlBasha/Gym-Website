@@ -125,20 +125,5 @@ h6 {
     }
 }
 
-/* Hussam */
-.custom-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #3498db;
-    color: #ffffff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin: 5px; /* Add margin between buttons for better spacing on small screens */
-}
 
-.custom-button:hover {
-    background-color: #2980b9;
-}
 
