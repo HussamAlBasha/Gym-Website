@@ -1,0 +1,46 @@
+
+.custom-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #3498db;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 5px; /* Add margin between buttons for better spacing on small screens */
+}
+
+.custom-button:hover {
+    background-color: #2980b9;
+}
+
+h1 {
+    font-size: 28px; /* Adjust the font size as needed */
+    font-family: 'Times New Roman', Times, serif;
+    color: orangered;
+}
+
+
+/* Custom table styling */
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+    overflow-x: auto;
+}
+
+.custom-table th, .custom-table td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd; /* Add border to each cell */
+}
+
+.custom-table th {
+    background-color: #3498db; /* Set the desired background color directly */
+    color: var(--accent-color); /* Set header text color */
+}
+
+.custom-table tbody tr:hover {
+    background-color: rgba(228, 122, 46, 0.1);
+}
