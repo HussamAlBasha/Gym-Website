@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}CQ2{% endblock %}
+
+
+{% block content %}
+    <br>
+    <h1> Find Members who have Bought Products with Purchase Details and Provided Feedback</h1>
+    <br>
+    
+
+    <div class="main">
+        <div class="table-responsive-custom">
+            <table class="custom-table">
+                <thead>
+                    <tr>
+                        <th>Member Name</th>
+                        <th>Bought Products</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in rows %}
+                        <tr>
+                            <td>{{ row[0] }}</td>
+                            <td>{{ row[1] }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    
+    
+    <button class="custom-button" onclick="location.href='/'">Home Page</button>
+    
+{% endblock %}

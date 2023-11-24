@@ -4,7 +4,8 @@
 
 {% block content %}
     <br>
-    <h1> List classes names with their corresponding number of enrolled members</h1>
+    <h1> Retrieve information about members: Number of the classes enrolled by each member, Total
+        amount spent on products and feedback count if they submitted any.</h1>
     <br>
     
 
@@ -13,8 +14,10 @@
             <table class="custom-table">
                 <thead>
                     <tr>
-                        <th>Class Name</th>
-                        <th>Enrollment Count</th>
+                        <th>Member Name</th>
+                        <th>Total Classes Enrolled</th>
+                        <th>Total Spent on Products</th>
+                        <th>Feedback Count</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -22,6 +25,8 @@
                         <tr>
                             <td>{{ row[0] }}</td>
                             <td>{{ row[1] }}</td>
+                            <td>{{ row[2] }}</td>
+                            <td>{{ row[3] }}</td>
                         </tr>
                     {% endfor %}
                 </tbody>
@@ -29,7 +34,7 @@
         </div>
     </div>
     
-
+    
     <button class="custom-button" onclick="location.href='/'">Home Page</button>
     
 {% endblock %}

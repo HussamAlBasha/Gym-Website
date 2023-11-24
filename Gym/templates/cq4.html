@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}CQ2{% endblock %}
+
+
+{% block content %}
+    <br>
+    <h1> List gym members with their total spending on each product type in 2023, including current 
+        product stock, sorted by total spending per product.</h1>
+    <br>
+    
+
+    <div class="main">
+        <div class="table-responsive-custom">
+            <table class="custom-table">
+                <thead>
+                    <tr>
+                        <th>Member ID</th>
+                        <th>Member Name</th>
+                        <th>Email</th>
+                        <th>City</th>
+                        <th>State</th>
+                        <th>Total Spent</th>
+                        <th>Products Bought</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in rows %}
+                        <tr>
+                            <td>{{ row[0] }}</td>
+                            <td>{{ row[1] }}</td>
+                            <td>{{ row[2] }}</td>
+                            <td>{{ row[3] }}</td>
+                            <td>{{ row[4] }}</td>
+                            <td>{{ row[5] }}</td>
+                            <td>{{ row[6] }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    
+    <button class="custom-button" onclick="location.href='/'">Home Page</button>
+    
+{% endblock %}

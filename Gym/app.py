@@ -95,6 +95,10 @@ def classes_given():
     else:
         return render_template("classes_given.html")
     
+
+##########################################################################################################################
+#  Complex Queries  
+    
 @app.route("/cq1", methods = ["Get", "Post"])
 def cq1():
 
@@ -124,7 +128,312 @@ def cq1():
             
     else:
         return render_template("cq1.html", trainers=trainers)
+
+@app.route("/cq2", methods = ["Get"])
+def cq2():
+
+    cq2 = """
+    WITH EnrollmentCounts AS (
+        SELECT "e_class_id_fk", COUNT(*) AS "EnrollmentCount"
+        FROM "Enrolls"
+        GROUP BY "e_class_id_fk"
+    )
+    SELECT "Class"."class_name" AS "ClassName", "EnrollmentCount"
+    FROM EnrollmentCounts
+    JOIN "Class" ON "Class"."class_id" = EnrollmentCounts."e_class_id_fk";
+    """
+
+    cursor.execute(cq2)
+    rows = cursor.fetchall() 
+      
+    if not rows:
+        return render_template("cq2.html")
+    return render_template("cq2.html", rows=rows)
+
+@app.route("/cq3", methods = ["Get"])
+def cq3():
+
+    cq3 = """
+    SELECT 
+            cc.cc_name AS "Cleaning Company",
+            SUM(cl.cleaning_cost) AS "Total Cleaning Cost",
+            ROUND(AVG(r.r_capacity), 1) AS "Average Room Capacity"
+        FROM "Cleaning Company" cc
+        JOIN "Cleans" cl ON cc.cc_id = cl.cc_id_fk
+        JOIN "Room" r ON cl.r_id_fk = r.r_id
+        GROUP BY cc.cc_name
+        ORDER BY "Total Cleaning Cost" DESC;
+    """
+
+    cursor.execute(cq3)
+    rows = cursor.fetchall() 
+        
+    if not rows:
+        return render_template("cq3.html")
+    return render_template("cq3.html", rows=rows)
+
+@app.route("/cq4", methods = ["Get"])
+def cq4():
+
+    cq4 = """
+    SELECT 
+        M.m_id,
+        M.m_name,
+        M.m_email,
+        M.m_city,
+        M.m_state,
+        SUM(B.quantity * P.p_price) AS total_spent,
+        STRING_AGG(P.p_name || ' (x' || B.quantity || ')', ', ') AS products_bought
+    FROM public."Member" M
+    JOIN public."Buys" B ON M.m_id = B.b_m_id_fk
+    JOIN public."Product" P ON B.barcode_fk = P.barcode
+    GROUP BY M.m_id
+    ORDER BY total_spent DESC;
+    """
+
+    cursor.execute(cq4)
+    rows = cursor.fetchall()     
+        
+    if not rows:
+        return render_template("cq4.html")  
+    return render_template("cq4.html", rows=rows)
+
+@app.route("/cq5", methods = ["Get"])
+def cq5():
+
+    cq5 = """
+    SELECT m.m_name AS "MemberName", p.p_name AS "BoughtProducts"
+            FROM "Member" m
+            JOIN "Buys" b ON m.m_id = b.b_m_id_fk
+            JOIN "Product" p ON b.barcode_fk = p.barcode
+            WHERE EXISTS (
+                SELECT feedback_id
+                FROM "Feedback" f
+                WHERE m.m_id = f.f_m_id_fk
+            );
+    """
+
+    cursor.execute(cq5)
+    rows = cursor.fetchall() 
+        
+    if not rows:
+        return render_template("cq5.html")  
+    return render_template("cq5.html", rows=rows)
+        
+@app.route("/cq6", methods = ["Get"])
+def cq6():
+
+    cq6 = """
+    SELECT
+    m.m_name AS "MemberName",
+    (
+        SELECT COUNT(DISTINCT e.e_class_id_fk)
+        FROM "Enrolls" e
+        WHERE e.e_m_id_fk = m.m_id
+    ) AS "TotalClassesEnrolled",
+    (
+        SELECT SUM(b.quantity * p.p_price)
+        FROM "Buys" b
+        INNER JOIN "Product" p ON b.barcode_fk = p.barcode
+        WHERE b.b_m_id_fk = m.m_id
+    ) AS "TotalSpentOnProducts",
+    (
+        SELECT COUNT(*) AS "FeedbackCount"
+        FROM "Feedback" f
+        WHERE f.f_m_id_fk = m.m_id
+        GROUP BY f.f_m_id_fk
+    ) AS "FeedbackCount"
+    FROM "Member" m;
+    """
+
+    cursor.execute(cq6)
+    rows = cursor.fetchall() 
+        
+    if not rows:
+        return render_template("cq6.html")   
+    return render_template("cq6.html", rows=rows)
+
+@app.route("/cq7", methods = ["Get"])
+def cq7():
+
+    cq7 = """
+    SELECT m.m_id, m.m_name, 'Enrolled' AS activity_type
+    FROM "Member" m
+    JOIN "Enrolls" e ON m.m_id = e.e_m_id_fk
+    UNION
+    SELECT m.m_id, m.m_name, 'Bought' AS activity_type
+    FROM "Member" m
+    JOIN "Buys" b ON m.m_id = b.b_m_id_fk
+    WHERE EXISTS (
+    SELECT 1
+    FROM "Product" p
+    WHERE p.barcode = b.barcode_fk
+    AND b.quantity > 5
+    )
+    ORDER BY m_id;"""
+
+    cursor.execute(cq7)
+    rows = cursor.fetchall() 
+        
+    if not rows:
+        return render_template("cq7.html")  
+    return render_template("cq7.html", rows=rows)
+
+@app.route("/cq8", methods = ["Get"])
+def cq8():
+
+    cq8 = """
+    WITH EnrolledMembers AS (
+    SELECT m.m_id
+    FROM "Member" m
+    JOIN "Enrolls" e ON m.m_id = e.e_m_id_fk
+    ),
+    BoughtMembers AS (
+    SELECT m.m_id
+    FROM "Member" m
+    JOIN "Buys" b ON m.m_id = b.b_m_id_fk
+    ),
+    AssignedMembers AS (
+    SELECT m.m_id AS m_id, m.m_name AS m_name
+    FROM "Member" m
+    JOIN "Assigned to" a ON m.m_id = a.a_m_id_fk
+    JOIN "Trainer" t ON a.a_t_id_fk = t.t_id
+    )
+    SELECT m.m_id, m.m_name
+    FROM "Member" m
+    WHERE m.m_id IN (SELECT m_id FROM EnrolledMembers INTERSECT SELECT m_id 
+    FROM BoughtMembers)
+    EXCEPT
+    SELECT m_id, m_name FROM AssignedMembers
+    ORDER BY m_id;
+    """
+
+    cursor.execute(cq8)
+    rows = cursor.fetchall()
+    if not rows:
+        return render_template("cq8.html")
+    return render_template("cq8.html", rows=rows)
+
+@app.route("/cq9", methods = ["Get"])
+def cq9():
+
+    cq9 = """
+    SELECT t.t_id, t.t_name
+    FROM "Trainer" t
+    JOIN "Assigned to" a ON t.t_id = a.a_t_id_fk
+    -- Trainers with assigned members
+    WHERE t.t_id IN (
+    SELECT DISTINCT a_t_id_fk
+    FROM "Assigned to"
+    )
+    INTERSECT
+    SELECT t.t_id, t.t_name
+    FROM "Trainer" t
+    JOIN "Assigned to" a ON t.t_id = a.a_t_id_fk
+    JOIN "Member" m ON a.a_m_id_fk = m.m_id
+    JOIN "Enrolls" e ON m.m_id = e.e_m_id_fk
+    GROUP BY t.t_id, t.t_name;
+    """
+
+    cursor.execute(cq9)
+    rows = cursor.fetchall() 
+        
+    if not rows:
+        return render_template("cq9.html")  
+    return render_template("cq9.html", rows=rows)
+
+@app.route("/cq10", methods = ["Get"])
+def cq10():
+
+    cq10 = """
+    DROP VIEW IF EXISTS enrolled_members_view;
+    DROP VIEW IF EXISTS purchasing_members_view;
+    CREATE VIEW enrolled_members_view AS
+    SELECT m.m_id, m.m_name, c.class_name
+    FROM "Member" m
+    JOIN "Enrolls" e ON m.m_id = e.e_m_id_fk
+    JOIN "Class" c ON e.e_class_id_fk = c.class_id;
+    CREATE VIEW purchasing_members_view AS
+    SELECT m.m_id, m.m_name, p.p_name, p.p_price
+    FROM "Member" m
+    JOIN "Buys" b ON m.m_id = b.b_m_id_fk
+    JOIN "Product" p ON b.barcode_fk = p.barcode;
+    -- Use UNION to combine the results of enrolled members and purchasing members
+    WITH combined_activities AS (
+    SELECT m_id, m_name, 'Enrollment' AS activity_type, class_name AS activity
+    FROM enrolled_members_view
+    UNION
+    SELECT m_id, m_name, 'Purchase' AS activity_type, p_name AS activity
+    FROM purchasing_members_view
+    )
+    -- Filter for members who have both enrolled in a class and made a purchase
+    SELECT m_id, m_name, activity_type, activity
+    FROM combined_activities
+    WHERE m_id IN (
+    SELECT m_id
+    FROM combined_activities
+    GROUP BY m_id
+    HAVING COUNT(DISTINCT activity_type) = 2
+    )
+    ORDER BY m_id;
+    """
+
+    cursor.execute(cq10)
+    rows = cursor.fetchall() 
     
+    if not rows:
+        return render_template("cq10.html")  
+    return render_template("cq10.html", rows=rows)
+
+
+@app.route("/cq11", methods = ["Get"])
+def cq11():
+
+    cq11 = """
+    SELECT 
+    e.e_name AS equipment_name,
+    e.e_purchase_date,
+    d.defect_description,
+    mc.mc_name AS maintenance_company
+    FROM "Equipment" e
+    JOIN "Defect" d ON e.e_id = d.e_id_fk
+    JOIN "Maintenance Company" mc ON d.f_mc_id_fk = mc.mc_id
+    WHERE e.e_purchase_date > '2022-01-01';
+    """
+
+    cursor.execute(cq11)
+    rows = cursor.fetchall() 
+        
+    if not rows:
+        return render_template("cq11.html")  
+    return render_template("cq11.html", rows=rows)
+
+
+@app.route("/cq12", methods = ["Get"])
+def cq12():
+
+    cq12 = """
+    SELECT 
+    M.m_name,
+    MS.mp_name AS Membership_Type,
+    F.feedback_text,
+    F.resolution_status
+    FROM public."Member" M
+    INNER JOIN public."Subscribe to" S ON M.m_id = S.s_m_id_fk
+    INNER JOIN public."Membership" MS ON S.mp_name_fk = MS.mp_name
+    INNER JOIN public."Feedback" F ON M.m_id = F.f_m_id_fk
+    ORDER BY M.m_id ASC;
+    """
+
+    cursor.execute(cq12)
+    rows = cursor.fetchall() 
+      
+    if not rows:
+        return render_template("cq12.html")
+    return render_template("cq12.html", rows=rows)
+
+##########################################################################################################################
+
 
 @app.route("/All") 
 def All():

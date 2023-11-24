@@ -4,7 +4,8 @@
 
 {% block content %}
     <br>
-    <h1> List classes names with their corresponding number of enrolled members</h1>
+    <h1> Retrieve members who have either enrolled in a class or bought a product with a 
+        quantity greater than 5</h1>
     <br>
     
 
@@ -13,8 +14,9 @@
             <table class="custom-table">
                 <thead>
                     <tr>
-                        <th>Class Name</th>
-                        <th>Enrollment Count</th>
+                        <th>Member ID</th>
+                        <th>Member Name</th>
+                        <th>Activity Type</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -22,6 +24,7 @@
                         <tr>
                             <td>{{ row[0] }}</td>
                             <td>{{ row[1] }}</td>
+                            <td>{{ row[2] }}</td>
                         </tr>
                     {% endfor %}
                 </tbody>
@@ -29,7 +32,8 @@
         </div>
     </div>
     
-
+    
+    
     <button class="custom-button" onclick="location.href='/'">Home Page</button>
     
 {% endblock %}

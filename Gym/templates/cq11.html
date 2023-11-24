@@ -4,17 +4,19 @@
 
 {% block content %}
     <br>
-    <h1> List classes names with their corresponding number of enrolled members</h1>
+    <h1>Find all equipment purchased after 2022-01-01 that has had a defect and the company 
+        responsible for fixing the defect, including the defect description:</h1>
     <br>
     
-
     <div class="main">
         <div class="table-responsive-custom">
             <table class="custom-table">
                 <thead>
                     <tr>
-                        <th>Class Name</th>
-                        <th>Enrollment Count</th>
+                        <th>Equipment Name</th>
+                        <th>Purchase Date</th>
+                        <th>Defect Description</th>
+                        <th>Maintenance Company</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -22,6 +24,8 @@
                         <tr>
                             <td>{{ row[0] }}</td>
                             <td>{{ row[1] }}</td>
+                            <td>{{ row[2] }}</td>
+                            <td>{{ row[3] }}</td>
                         </tr>
                     {% endfor %}
                 </tbody>
@@ -29,7 +33,7 @@
         </div>
     </div>
     
-
+    
     <button class="custom-button" onclick="location.href='/'">Home Page</button>
     
 {% endblock %}

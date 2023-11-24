@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}CQ2{% endblock %}
+
+
+{% block content %}
+    <br>
+    <h1>List cleaning companies with their total cleaning expenses and average room capacity 
+        cleaned, sorted by total cost.</h1>
+    <br>
+    
+
+    <div class="main">
+        <div class="table-responsive-custom">
+            <table class="custom-table">
+                <thead>
+                    <tr>
+                        <th>Cleaning Company</th>
+                        <th>Total Cleaning Cost</th>
+                        <th>Average Room Capacity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in rows %}
+                        <tr>
+                            <td>{{ row[0] }}</td>
+                            <td>{{ row[1] }}</td>
+                            <td>{{ row[2] }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <button class="custom-button" onclick="location.href='/'">Home Page</button>
+    
+{% endblock %}

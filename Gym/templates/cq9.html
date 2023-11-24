@@ -4,7 +4,8 @@
 
 {% block content %}
     <br>
-    <h1> List classes names with their corresponding number of enrolled members</h1>
+    <h1>- Retrieve trainers who have both assigned members and at least one member enrolled in a 
+        class:</h1>
     <br>
     
 
@@ -13,8 +14,8 @@
             <table class="custom-table">
                 <thead>
                     <tr>
-                        <th>Class Name</th>
-                        <th>Enrollment Count</th>
+                        <th>Trainer ID</th>
+                        <th>Trainer Name</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -29,7 +30,8 @@
         </div>
     </div>
     
-
+    
+    
     <button class="custom-button" onclick="location.href='/'">Home Page</button>
     
 {% endblock %}
