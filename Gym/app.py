@@ -580,5 +580,28 @@ def AddPurchase():
 
     return render_template('add_purchase.html')
 
+@app.route('/admin/BuyingActions/update_product_quantity', methods=['GET', 'POST'])
+def update_product_quantity():
+    if request.method == 'POST':
+        barcode = request.form['barcode']
+        new_quantity = request.form['new_quantity']
+
+        try:
+            with conn.cursor() as cursor:
+                # Execute the SQL query to update the product quantity
+                cursor.execute("""
+                    UPDATE "Product" SET p_quantity = %s WHERE barcode = %s;
+                """, (new_quantity, barcode))
+
+                # Commit the transaction
+                conn.commit()
+
+            return render_template('update_product_quantity.html', success=True)
+
+        except Exception as e:
+            return render_template('update_product_quantity.html', success=False, error_message=str(e))
+
+    return render_template('update_product_quantity.html', success=None)
+
 if __name__ == '__main__':
     app.run(debug=True)
