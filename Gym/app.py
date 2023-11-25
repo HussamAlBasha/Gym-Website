@@ -433,9 +433,11 @@ def cq12():
     return render_template("cq12.html", rows=rows)
 
 ##########################################################################################################################
+@app.route("/admin")
+def admin():
+    return render_template("admin.html")
 
-
-@app.route("/All") 
+@app.route("/admin/PageAll") 
 def All():
     # "Assigned to" table
     cursor.execute('SELECT * FROM "Assigned to" ORDER BY a_m_id_fk, a_t_id_fk ASC;')
