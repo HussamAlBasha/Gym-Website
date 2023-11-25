@@ -6,27 +6,6 @@
 {% block content %}
    
 
-<div class="main">
-   <div class="table-responsive-custom">
-       <table class="custom-table">
-           <thead>
-               <tr>
-                   <th>Class Name</th>
-                   <th>Enrollment Count</th>
-               </tr>
-           </thead>
-           <tbody>
-               {% for row in rows_class %}
-                   <tr>
-                       <td>{{ row[0] }}</td>
-                       <td>{{ row[1] }}</td>
-                   </tr>
-               {% endfor %}
-           </tbody>
-       </table>
-   </div>
-</div>
-
 <!-- Table 1: Assigned to Table -->
 <div class="main">
    <div class="table-responsive-custom">
@@ -76,8 +55,6 @@
        </table>
    </div>
 </div>
-
-<!-- Repeat the structure for each additional table -->
 
 <!-- Table 3: Class Table -->
 <div class="main">
@@ -137,7 +114,6 @@
    </div>
 </div>
 
-<!-- Repeat the structure for each additional table -->
 
 <!-- Table 5: Cleans Table -->
 <div class="main">
@@ -199,8 +175,6 @@
    </div>
 </div>
 
-<!-- Repeat the structure for each additional table -->
-
 <!-- Table 7: Enrolls Table -->
 <div class="main">
    <div class="table-responsive-custom">
@@ -253,7 +227,6 @@
    </div>
 </div>
 
-<!-- Repeat the structure for each additional table -->
 
 <!-- Table 9: Feedback Table -->
 <div class="main">
@@ -283,7 +256,6 @@
    </div>
 </div>
 
-<!-- Repeat the structure for each additional table -->
 
 <!-- Table 10: Guest Table -->
 <div class="main">
@@ -313,7 +285,6 @@
    </div>
 </div>
 
-<!-- Repeat the structure for each additional table -->
 
 <!-- Table 11: Maintenance Company Table -->
 <div class="main">
@@ -338,8 +309,6 @@
        </table>
    </div>
 </div>
-
-<!-- Repeat the structure for each additional table -->
 
 <!-- Table 12: Member Table -->
 <div class="main">
@@ -379,8 +348,8 @@
    </div>
 </div>
 
+<!-- Table 13: Member Emergency Contact Table -->
 <div class="main">
-   <!-- Table 13: Member Emergency Contact Table -->
    <div class="table-responsive-custom">
        <table class="custom-table">
            <thead>
@@ -401,8 +370,8 @@
    </div>
 </div>
 
+<!-- Table 14: Membership Table -->
 <div class="main">
-   <!-- Table 14: Membership Table -->
    <div class="table-responsive-custom">
        <table class="custom-table">
            <thead>
@@ -583,6 +552,5 @@
        </table>
    </div>
 </div>
-
 
 {% endblock %}

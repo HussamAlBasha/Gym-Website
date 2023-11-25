@@ -33,7 +33,7 @@ h1 {
 
 .custom-table th, .custom-table td {
     padding: 12px;
-    text-align: left;
+    text-align: center;
     border: 1px solid #ddd; /* Add border to each cell */
 }
 
