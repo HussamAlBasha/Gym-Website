@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Admin Page{% endblock %}
+{% block title %}Buying Actions Page{% endblock %}
 
 {% block content %}
     <style>
@@ -54,19 +54,18 @@
 
     <div id="main-container">
         <div class="button-container">
-            <button class="custom-button" onclick="location.href='/'">Home Page</button>
+            <button class="custom-button" onclick="location.href='/admin'">Admin Page</button>
         </div>
+        <!-- <img src="{{ url_for('static', filename='images/trainer.png') }}" alt="A trainer"> -->
 
         <div class="button-container">
-            <button class="custom-button" onclick="location.href='/admin/PageAll'">Display all Tables</button>
+            <button class="custom-button" onclick="location.href='/admin/BuyingActions/AmountSpent'">Amount Spent by a Member</button>
         </div>
-
         <div class="button-container">
-            <button class="custom-button" onclick="location.href='/admin/BuyingActions'">Buying Actions</button>
+            <button class="custom-button" onclick="location.href='/admin/BuyingActions/AddPurchase'">Add Purchase</button>
         </div>
-
         <div class="button-container">
-            <button class="custom-button" onclick="location.href='/admin/update_trainer_salaries'">Update Trainers' Salaries</button>
+            <button class="custom-button" onclick="location.href='/admin/BuyingActions/update_product_quantity'">Update Product Quantity</button>
         </div>
     </div>
 

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Add Purchase{% endblock %}
+
+{% block content %}
+    <br>
+    <h1>Add a new Purchase</h1>
+    <form action="/admin/BuyingActions/AddPurchase" method="POST">
+        <label for="b_m_id_fk">Member ID:</label>
+        <input type="number" name="b_m_id_fk" required><br>
+
+        <label for="barcode_fk">Barcode:</label>
+        <input type="number" name="barcode_fk" required><br>
+
+        <label for="quantity">Quantity:</label>
+        <input type="number" name="quantity" required><br>
+
+        <label for="purchase_date">Purchase Date:</label>
+        <input type="date" name="purchase_date" required><br>
+
+        <input class="custom-button" type="submit" value="Add Purchase">
+    </form>
+
+    <button class="custom-button" onclick="location.href='/admin/BuyingActions'">Back</button>
+{% endblock %}
