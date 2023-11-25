@@ -1,5 +1,6 @@
 from flask import Flask, request, render_template
 import psycopg2
+from psycopg2 import Error as PsycopgError
 
 # Connect to the database
 conn = psycopg2.connect(
@@ -521,7 +522,63 @@ def All():
 
     return render_template("PageAll.html", rows_assigned_to=rows_assigned_to, rows_buys=rows_buys, rows_class=rows_class, rows_cleaning_company=rows_cleaning_company, rows_cleans=rows_cleans, rows_defect=rows_defect, rows_enrolls=rows_enrolls, rows_equipment=rows_equipment, rows_feedback=rows_feedback, rows_guest=rows_guest, rows_maintenance_company=rows_maintenance_company, rows_member=rows_member, rows_emergency_contact=rows_emergency_contact, rows_membership=rows_membership, rows_product=rows_product, rows_require=rows_require, rows_room=rows_room, rows_subscribe_to=rows_subscribe_to, rows_takes_place_in=rows_takes_place_in, rows_trainer=rows_trainer)
 
-        
+@app.route("/admin/BuyingActions")
+def BuyingActions():
+    return render_template("buying_actions.html")
+
+
+@app.route("/admin/BuyingActions/AmountSpent", methods=['GET', 'POST'])
+def AmountSpent():
+    if request.method == 'POST':
+        member_id = request.form['mid']
+
+        try:
+            # Execute the SQL query to calculate the total amount
+            with conn.cursor() as cursor:
+                cursor.execute("""
+                    SELECT SUM(p.p_price * b.quantity) AS total_amount
+                    FROM "Buys" b
+                    JOIN "Product" p ON b.barcode_fk = p.barcode
+                    WHERE b.b_m_id_fk = %s;
+                """, (member_id,))
+
+                result = cursor.fetchone()
+                total_amount = result[0] if result else None
+
+            return render_template('amount_spent.html', total_amount=total_amount)
+
+        except PsycopgError as e:
+            return render_template('error.html', error_message=f"An unexpected database error occurred: {e}")
+
+    return render_template('amount_spent.html', total_amount=None)
+
+
+@app.route('/admin/BuyingActions/AddPurchase', methods=['GET', 'POST'])
+def AddPurchase():
+    if request.method == 'POST':
+        member_id = request.form['b_m_id_fk']
+        barcode = request.form['barcode_fk']
+        quantity = request.form['quantity']
+        purchase_date = request.form['purchase_date']
+
+        try:
+            # Execute the SQL query to insert into the "Buys" table
+            with conn.cursor() as cursor:
+                cursor.execute("""
+                    INSERT INTO "Buys" (b_m_id_fk, barcode_fk, quantity, purshase_date)
+                    VALUES (%s, %s, %s, %s);
+                """, (member_id, barcode, quantity, purchase_date))
+                
+                # Commit the transaction (if you're using connection pooling)
+                conn.commit()
+
+            # Render the same template after adding a new purchase
+            return render_template('add_purchase.html')
+
+        except PsycopgError as e:
+            return render_template('error.html', error_message=f"An unexpected database error occurred: {e}")
+
+    return render_template('add_purchase.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
