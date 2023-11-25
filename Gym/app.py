@@ -522,6 +522,28 @@ def All():
 
     return render_template("PageAll.html", rows_assigned_to=rows_assigned_to, rows_buys=rows_buys, rows_class=rows_class, rows_cleaning_company=rows_cleaning_company, rows_cleans=rows_cleans, rows_defect=rows_defect, rows_enrolls=rows_enrolls, rows_equipment=rows_equipment, rows_feedback=rows_feedback, rows_guest=rows_guest, rows_maintenance_company=rows_maintenance_company, rows_member=rows_member, rows_emergency_contact=rows_emergency_contact, rows_membership=rows_membership, rows_product=rows_product, rows_require=rows_require, rows_room=rows_room, rows_subscribe_to=rows_subscribe_to, rows_takes_place_in=rows_takes_place_in, rows_trainer=rows_trainer)
 
+@app.route('/admin/update_trainer_salaries', methods=['GET', 'POST'])
+def update_trainer_salaries():
+    if request.method == 'POST':
+        try:
+            with conn.cursor() as cursor:
+                # Update trainer salaries by 10%
+                cursor.execute("UPDATE \"Trainer\" SET t_salary = t_salary * 1.1;")
+                
+                # Commit the transaction
+                conn.commit()
+                
+                # Set a flag for successful update
+                update_success = True
+                return render_template('update_trainer_salaries.html', update_success=update_success)
+
+        except psycopg2.Error as e:
+            # Handle database errors
+            return render_template('error.html', error_message=f"An unexpected error occurred: {e}")
+
+    return render_template('update_trainer_salaries.html', update_success=False)
+
+
 @app.route("/admin/BuyingActions")
 def BuyingActions():
     return render_template("buying_actions.html")
