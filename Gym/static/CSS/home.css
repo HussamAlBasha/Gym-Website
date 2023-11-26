@@ -151,7 +151,8 @@ body {
 .slogan {
     text-align: center;
     font-size: 2em;
-    color: var(--slogan-text-color);
+    /* color: var(--slogan-text-color); */
+    color:#fff;
     margin: 20px 0;
 }
 

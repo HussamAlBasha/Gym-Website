@@ -7,10 +7,7 @@
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous"
     />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='CSS/styles.css') }}"
-    />
+    
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='CSS/cqstyles.css') }}"
@@ -26,58 +23,83 @@
   </head>
 
   <body>
-    <!-- <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container-fluid">
-              <a class="navbar-brand" href="#">Navbar</a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
+    <!-- Header Section -->
+    <header class="header">
+      <div class="logo">
+        <img
+          src="{{ url_for('static', filename='images/logo.jpg') }}"
+          alt="Fit Fusion Logo"
+        />
+      </div>
+      <nav>
+        <ul class="navigation">
+          <li><a href="/">Home</a></li>
+          <li><a href="about">About Us</a></li>
+          <!-- <li><a href="member-registration">Member Registration</a></li> -->
+        </ul>
+      </nav>
+    </header>
+    
+    <!-- Main Content Section -->
+    <div class="main-content">
+    <div style="padding-left: 20px"> 
+      <div style="padding-right: 20px"> 
+    {% block content %}
+    {% endblock %}
+    </div>
+    </div>
 
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/All">Home</a>
-                  </li>
 
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Display
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="All">Display All Tables</a></li>
-                        <li><a class="dropdown-item" href="A">Display All Entity tables</a></li>
-                    </ul>
-                  </li>
+    <!-- Footer Section -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Connect With Us</h3>
+          <ul class="social-links">
+            <li>
+              <a href="https://www.facebook.com/" target="_blank"
+                ><img
+                  src="{{ url_for('static', filename='images/facebook-logo.png') }}"
+                  alt="Facebook"
+              /></a>
+            </li>
 
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Information
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="B">Patient Information</a></li>
-                        <li><a class="dropdown-item" href="C">Doctor Information</a></li>
-                    </ul>
-                  </li>
+            <li>
+              <a href="https://www.instagram.com/" target="_blank"
+                ><img
+                  src="{{ url_for('static', filename='images/instagram-logo.png') }}"
+                  alt="Instagram"
+              /></a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Contact Information</h3>
+          <div class="contact-info">
+            <p>Email: info@fitfusion.com</p>
+            <p>Phone: 123-456-7890</p>
+          </div>
+        </div>
+        <div class="footer-section google-map">
+          <h3>Find Us</h3>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3311.617433633093!2d35.47981297424533!3d33.89950532578244!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151f17ba8ada0c2d%3A0x4de124146ca8879!2sAUB%20Main%20Gate!5e0!3m2!1sen!2slb!4v1683103233773!5m2!1sen!2slb"
+            frameborder="0"
+            style="border: 0"
+            allowfullscreen=""
+            aria-hidden="false"
+            tabindex="0"
+          >
+          </iframe>
+        </div>
+      </div>
+    </footer>
 
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Pages
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="D">Page D</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="D">Page D</a></li>
-                        
-                    </ul>
-                  </li>
- 
-                </ul>
-              </div>
-            </div>
-        </nav> -->
-
-    <!-- <h1 style="color: red;">{% block h1 %}{% endblock %}</h1> -->
-    <div style="padding-left: 20px">{% block content %} {% endblock %}</div>
+    <script 
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+      ></script>
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
       integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
@@ -88,5 +110,9 @@
       integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
       crossorigin="anonymous"
     ></script>
+
   </body>
 </html>
+
+
+

@@ -3,9 +3,11 @@
 
 
 {% block content %}
+
     <br>
     <h1>Find Members Enrolled in Classes Given by a Specific Trainer</h1>
     <br>
+
     <form action="" method="POST">
     <label for="t_name">Trainer ID/Name:</label>
     <select name="t_name" required>
@@ -14,7 +16,8 @@
         {% endfor %}
     </select><br><br>
     <input class="custom-button"  type="submit" value="Find">
-</form>
+    </form>
+    <br>
 
     <div class="main">
         <div class="table-responsive-custom">
@@ -37,8 +40,8 @@
         </div>
     </div>
 
-
-
-    <button class="custom-button" onclick="location.href='/'">Home Page</button>
+    <div class="card-container">
+    <button class="custom-button" onclick="location.href='/admin/complex'">Back</button>
+    </div>
     
 {% endblock %}

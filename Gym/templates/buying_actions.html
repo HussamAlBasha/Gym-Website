@@ -2,71 +2,18 @@
 {% block title %}Buying Actions Page{% endblock %}
 
 {% block content %}
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-        }
-
-        #main-container {
-            text-align: center;
-            width: 80%; /* Adjusted from max-width to width for responsiveness */
-            max-width: 1000px;
-            margin: auto;
-        }
-
-        img {
-            width: 100%; /* Adjusted to set the width to 100% */
-            max-width: 100%;
-            height: auto;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-   
-        .button-container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-around;
-        margin-top: 20px;
-        }
     
-        @media (max-width: 600px) {
-            /* Styles for screens with a maximum width of 600px or less */
-            #main-container {
-                width: 90%; /* Adjusted width for smaller screens */
-            }
+<div class="card-container">
 
-            .button-container {
-                flex-direction: column; /* Stack buttons vertically on small screens */
-                align-items: center; /* Center buttons on small screens */
-            }
-        }
-    </style>
-</head>
-<body>
+    <button class="btn btn-secondary" onclick="location.href='/admin/BuyingActions/AddPurchase'">Add Purchase</button>
 
-    <div id="main-container">
-        <div class="button-container">
-            <button class="custom-button" onclick="location.href='/admin'">Admin Page</button>
-        </div>
-        <!-- <img src="{{ url_for('static', filename='images/trainer.png') }}" alt="A trainer"> -->
+    <button class="btn btn-secondary" onclick="location.href='/admin/BuyingActions/AmountSpent'">Amount Spent by a Member</button>
 
-        <div class="button-container">
-            <button class="custom-button" onclick="location.href='/admin/BuyingActions/AmountSpent'">Amount Spent by a Member</button>
-        </div>
-        <div class="button-container">
-            <button class="custom-button" onclick="location.href='/admin/BuyingActions/AddPurchase'">Add Purchase</button>
-        </div>
-        <div class="button-container">
-            <button class="custom-button" onclick="location.href='/admin/BuyingActions/update_product_quantity'">Update Product Quantity</button>
-        </div>
+    <button class="btn btn-secondary" onclick="location.href='/admin/BuyingActions/update_product_quantity'">Update Product Quantity</button>
+</div>
+
+    <div class="card-container">
+    <button class="custom-button" onclick="location.href='/admin'">Back</button>
     </div>
 
 {% endblock %}

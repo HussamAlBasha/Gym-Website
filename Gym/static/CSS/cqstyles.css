@@ -1,25 +1,37 @@
-
-.custom-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #3498db;
-    color: #ffffff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin: 5px; /* Add margin between buttons for better spacing on small screens */
-}
-
-.custom-button:hover {
-    background-color: #2980b9;
-}
-
 h1 {
+    font-size: 34px; /* Adjust the font size as needed */
+    font-family: 'Times New Roman', Times, serif;
+    color: white;
+    text-align: center;
+}
+
+h2 {
     font-size: 28px; /* Adjust the font size as needed */
     font-family: 'Times New Roman', Times, serif;
-    color: orangered;
-    text-align: center;
+    color: white;
+}
+
+li{
+    font-size: 24px; /* Adjust the font size as needed */
+    font-family: 'Times New Roman', Times, serif;
+    color: white;
+}
+
+.custom-button {
+    /* Your existing button styling */
+    padding: 10px 20px;
+    font-size: 16px;
+    border: 2px solid #6c757d; /* Use the secondary color or customize */
+    background-color: #6c757d; /* Use the secondary color or customize */
+    color: #ffffff; /* Text color, adjust as needed */
+    border-radius: 5px; /* Add rounded corners if desired */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Add a smooth transition effect */
+
+    /* Hover effect */
+    &:hover {
+        background-color: #495057; /* Use a darker shade or customize */
+    }
 }
 
 
@@ -29,6 +41,7 @@ h1 {
     border-collapse: collapse;
     margin-bottom: 1rem;
     overflow-x: auto;
+    
 }
 
 .custom-table th, .custom-table td {
@@ -38,10 +51,31 @@ h1 {
 }
 
 .custom-table th {
-    background-color: #3498db; /* Set the desired background color directly */
+    background-color: gray; /* Set the desired background color directly */
     color: var(--accent-color); /* Set header text color */
 }
 
-.custom-table tbody tr:hover {
-    background-color: rgba(228, 122, 46, 0.1);
+.custom-table tbody{
+    background-color: whitesmoke;
 }
+
+.custom-table tbody tr:hover {
+    background-color: whitesmoke;
+}
+
+
+/* Banner Styling */
+.tbanner {
+    width: 100%;
+    height: 500px; /* Adjust the initial height as needed */
+    background-image: url("../images/t.webp");
+    background-size: cover;
+    background-position: center;
+    transition: opacity 0.5s ease;
+    max-height: 800px; /* Adjust the max height as needed */
+    margin: 0; /* Remove any default margin */
+    padding: 0; /* Remove any default padding */
+    overflow: hidden; /* Hide overflow to ensure contained image */
+}
+
+  
