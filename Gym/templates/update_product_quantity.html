@@ -2,28 +2,29 @@
 {% block title %}Update Product Quantity{% endblock %}
 
 {% block content %}
-    <br>
-    <h1>Update Product Quantity</h1>
-    <form action="/admin/BuyingActions/update_product_quantity" method="POST">
-        <label for="barcode">Barcode:</label>
-        <input type="text" name="barcode" required><br>
+    <div style="text-align: center;">
+        <br>
+        <h1>Update Product Quantity</h1>
+        <form action="/admin/BuyingActions/update_product_quantity" method="POST" class="search-member-form">
+            <label for="barcode">Barcode:</label>
+            <input type="text" name="barcode" required style="border-radius: 8px; margin-bottom: 10px;"><br>
 
-        <label for="new_quantity">New Quantity:</label>
-        <input type="number" name="new_quantity" required><br>
+            <label for="new_quantity">New Quantity:</label>
+            <input type="number" name="new_quantity" required style="border-radius: 8px; margin-bottom: 10px;"><br>
 
-        <input class="custom-button" type="submit" value="Update Quantity">
-    </form>
+            <input class="custom-button" type="submit" value="Update Quantity" style="border-radius: 8px;">
+        </form>
 
-    {% if success is not none %}
-        {% if success %}
-            <p style="color: green;">Product quantity updated successfully!</p>
-        {% else %}
-            <p style="color: red;">An error occurred: {{ error_message }}</p>
+        {% if success is not none %}
+            {% if success %}
+                <p style="color: green;">Product quantity updated successfully!</p>
+            {% else %}
+                <p style="color: red;">An error occurred: {{ error_message }}</p>
+            {% endif %}
         {% endif %}
-    {% endif %}
 
-    <div class="card-container">
-    <button class="custom-button" onclick="location.href='/admin/BuyingActions'">Back</button>
+        <div class="card-container mt-5">
+            <button class="custom-button" onclick="location.href='/admin/BuyingActions'" style="border-radius: 8px;">Back</button>
+        </div>
     </div>
-    
 {% endblock %}
