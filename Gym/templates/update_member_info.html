@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='CSS/home.css') }}"
+    />
+    <title>Update Member Information</title>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+      <div class="logo">
+        <img
+          src="{{ url_for('static', filename='images/logo.jpg') }}"
+          alt="Fit Fusion Logo"
+        />
+      </div>
+      <nav>
+        <ul class="navigation">
+          <li><a href="/">Home</a></li>
+          <li><a href="about">About Us</a></li>
+          <li>Member Info Update</li>
+        </ul>
+      </nav>
+    </header>
+<div class="main-content">
+    <div class="container mt-5">
+        <h2>Member Information</h2>
+        {% if success %}
+        <div class="alert alert-success">Update successful!</div>
+        {% endif %}
+        <form method="POST" action="{{ url_for('update_member_info', member_id=member_info[0]) }}">
+            <div class="form-group">
+                <label for="m_phone_num">Phone Number:</label>
+                <input type="text" class="form-control" id="m_phone_num" name="m_phone_num" value="{{ member_info[1] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="m_email">Email:</label>
+                <input type="email" class="form-control" id="m_email" name="m_email" value="{{ member_info[2] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="m_name">Name:</label>
+                <input type="text" class="form-control" id="m_name" name="m_name" value="{{ member_info[3] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="m_gender">Gender:</label>
+                <select class="form-control" id="m_gender" name="m_gender" required>
+                    <option value="Male" {% if member_info[4] == 'Male' %}selected{% endif %}>Male</option>
+                    <option value="Female" {% if member_info[4] == 'Female' %}selected{% endif %}>Female</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="m_locker_num">Locker Number:</label>
+                <input type="number" class="form-control" id="m_locker_num" name="m_locker_num" value="{{ member_info[5] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="m_dob">Date of Birth:</label>
+                <input type="date" class="form-control" id="m_dob" name="m_dob" value="{{ member_info[6] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="m_state">State:</label>
+                <input type="text" class="form-control" id="m_state" name="m_state" value="{{ member_info[7] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="m_city">City:</label>
+                <input type="text" class="form-control" id="m_city" name="m_city" value="{{ member_info[8] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="m_street">Street:</label>
+                <input type="text" class="form-control" id="m_street" name="m_street" value="{{ member_info[9] }}" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Update Information</button>
+        </form>
+    </div>
+</div>
+<!-- Footer Section -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Connect With Us</h3>
+          <ul class="social-links">
+            <li>
+              <a href="https://www.facebook.com/" target="_blank"
+                ><img
+                  src="{{ url_for('static', filename='images/facebook-logo.png') }}"
+                  alt="Facebook"
+              /></a>
+            </li>
+
+            <li>
+              <a href="https://www.instagram.com/" target="_blank"
+                ><img
+                  src="{{ url_for('static', filename='images/instagram-logo.png') }}"
+                  alt="Instagram"
+              /></a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Contact Information</h3>
+          <div class="contact-info">
+            <p>Email: info@fitfusion.com</p>
+            <p>Phone: 123-456-7890</p>
+          </div>
+        </div>
+        <div class="footer-section google-map">
+          <h3>Find Us</h3>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3311.617433633093!2d35.47981297424533!3d33.89950532578244!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151f17ba8ada0c2d%3A0x4de124146ca8879!2sAUB%20Main%20Gate!5e0!3m2!1sen!2slb!4v1683103233773!5m2!1sen!2slb"
+            frameborder="0"
+            style="border: 0"
+            allowfullscreen=""
+            aria-hidden="false"
+            tabindex="0"
+          >
+          </iframe>
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='CSS/home.css') }}"
+    />
+    <title>Member Page - Fit Fusion Gym</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+      }
+
+      .header {
+        background-color: #333; /* Dark background for header */
+      }
+
+      .header .logo img {
+        height: auto;
+        max-width: 100%;
+        max-height: 60px; /* Limit the logo size */
+      }
+
+      .navigation {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: center; /* Center navigation items */
+        align-items: center;
+      }
+
+      .navigation li a {
+        color: white;
+        padding: 10px 15px;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .navigation li a:hover,
+      .navigation li a:focus {
+        color: #e47a2e;
+        background-color: #222; /* Slight highlight on hover/focus */
+      }
+
+      .main-content {
+        padding: 20px;
+      }
+
+      .search-member-form {
+        max-width: 500px;
+        margin: 30px auto;
+        padding: 20px;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        position: relative; /* For absolute positioning of the search button */
+      }
+
+      .search-member-form input[type="text"] {
+        width: calc(100% - 120px); /* Leave space for the button */
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        margin-right: 10px; /* Space between input and button */
+      }
+
+      .search-member-form input[type="submit"] {
+        width: 100px; /* Fixed width for the button */
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: none;
+        background-color: #e47a2e;
+        color: white;
+        cursor: pointer;
+        position: absolute; /* Position it to the right */
+        top: 0;
+        right: 0;
+      }
+
+      .search-member-form input[type="submit"]:hover {
+        background-color: #ff5722;
+      }
+
+      .buttons-section {
+        text-align: center; /* Center align the content */
+        margin-top: 30px; /* Add margin above the buttons */
+      }
+
+      .footer {
+        background-color: #333; /* Dark background for footer */
+        color: white;
+        padding: 20px 0;
+        position: relative; /* For footer content positioning */
+      }
+
+      .footer .footer-content {
+        display: flex;
+        justify-content: space-around; /* Space out footer content */
+        align-items: center;
+        flex-wrap: wrap; /* Wrap onto the next line on small screens */
+      }
+
+      .footer .footer-section {
+        margin: 10px 0; /* Space around footer sections */
+      }
+
+      .footer .footer-section h3 {
+        color: #e47a2e;
+      }
+
+      .footer .social-links {
+        list-style: none;
+        padding: 0;
+      }
+
+      .footer .social-links li {
+        display: inline;
+        margin-right: 10px;
+      }
+
+      .footer .social-links li a img {
+        height: 24px; /* Fixed height for social icons */
+      }
+
+      .footer .contact-info p {
+        margin: 0;
+      }
+
+      .footer .google-map iframe {
+        width: 100%;
+        height: 100px;
+        border: none;
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header Section -->
+    <header class="header">
+      <div class="logo">
+        <img
+          src="{{ url_for('static', filename='images/logo.jpg') }}"
+          alt="Fit Fusion Logo"
+        />
+      </div>
+      <nav>
+        <ul class="navigation">
+          <li><a href="/">Home</a></li>
+          <li><a href="about">About Us</a></li>
+          <li>Member Main Page</li>
+        </ul>
+      </nav>
+    </header>
+    <!-- Main Content Section -->
+    <div class="main-content">
+      <!-- Member Search Form -->
+      <div class="container mt-3">
+        <form
+          action="{{ url_for('member_page') }}"
+          method="post"
+          class="search-member-form"
+        >
+          <input
+            type="text"
+            name="member_name"
+            placeholder="Enter your name"
+            required
+          />
+          <input type="submit" value="Search" />
+        </form>
+      </div>
+      <!-- Accordion for Member Info -->
+      <div
+        id="memberInfoAccordion"
+        class="mt-3 container"
+        style="max-width: 600px"
+      >
+        <div class="card">
+          <div class="card-header">
+            <h2 class="mb-0">
+              <button
+                class="btn btn-link collapsed"
+                type="button"
+                data-toggle="collapse"
+                data-target="#collapseMemberInfo"
+                aria-expanded="{{ 'true' if member_info else 'false' }}"
+                aria-controls="collapseMemberInfo"
+              >
+                Member Info
+              </button>
+            </h2>
+          </div>
+          <div
+            id="collapseMemberInfo"
+            class="collapse {{ 'show' if member_info }}"
+            data-parent="#memberInfoAccordion"
+          >
+            <div class="card-body">
+              {% if member_info %}
+              <ul class="list-group list-group-flush">
+                {% for info in member_info %}
+                <li class="list-group-item">Name: {{ info[3] }}</li>
+                <li class="list-group-item">Email: {{ info[2] }}</li>
+                <li class="list-group-item">Phone: {{ info[1] }}</li>
+                <li class="list-group-item">Gender: {{ info[4] }}</li>
+                <li class="list-group-item">Locker Number: {{ info[5] }}</li>
+                <li class="list-group-item">Date of Birth: {{ info[6] }}</li>
+                <li class="list-group-item">State: {{ info[7] }}</li>
+                <li class="list-group-item">City: {{ info[8] }}</li>
+                <li class="list-group-item">Street: {{ info[9] }}</li>
+
+                {% endfor %}
+              </ul>
+              {% else %}
+              <p>No member information found. Please try another search.</p>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container mt-5">
+        <!-- Accordion for Membership Types -->
+        <div
+          id="membershipTypesAccordion"
+          class="mt-3 container"
+          style="max-width: 600px"
+        >
+          <div class="card">
+            <div class="card-header">
+              <h2 class="mb-0">
+                <button
+                  class="btn btn-link"
+                  type="button"
+                  data-toggle="collapse"
+                  data-target="#collapseMembershipTypes"
+                  aria-expanded="false"
+                  aria-controls="collapseMembershipTypes"
+                >
+                  Membership Types
+                </button>
+              </h2>
+            </div>
+            <div
+              id="collapseMembershipTypes"
+              class="collapse"
+              data-parent="#membershipTypesAccordion"
+            >
+              <div class="card-body">
+                {% if membership_types %}
+                <ul class="list-group list-group-flush">
+                  {% for type in membership_types %}
+                  <li class="list-group-item">
+                    {{ type[0] }} - ${{ type[1] }} for {{ type[2] }} days
+                  </li>
+                  {% endfor %}
+                </ul>
+                {% else %}
+                <p>No membership types found.</p>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Buttons Section -->
+        <div class="buttons-section mt-5 text-center">
+          <a href="/update-member" class="btn btn-primary"
+            >Update Member Info</a
+          >
+          <a href="/submit-feedback" class="btn btn-secondary">Give Feedback</a>
+        </div>
+      </div>
+    </div>
+    <!-- Footer Section -->
+    <!-- Footer Section -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Connect With Us</h3>
+          <ul class="social-links">
+            <li>
+              <a href="https://www.facebook.com/" target="_blank"
+                ><img
+                  src="{{ url_for('static', filename='images/facebook-logo.png') }}"
+                  alt="Facebook"
+              /></a>
+            </li>
+
+            <li>
+              <a href="https://www.instagram.com/" target="_blank"
+                ><img
+                  src="{{ url_for('static', filename='images/instagram-logo.png') }}"
+                  alt="Instagram"
+              /></a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Contact Information</h3>
+          <div class="contact-info">
+            <p>Email: info@fitfusion.com</p>
+            <p>Phone: 123-456-7890</p>
+          </div>
+        </div>
+        <div class="footer-section google-map">
+          <h3>Find Us</h3>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3311.617433633093!2d35.47981297424533!3d33.89950532578244!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151f17ba8ada0c2d%3A0x4de124146ca8879!2sAUB%20Main%20Gate!5e0!3m2!1sen!2slb!4v1683103233773!5m2!1sen!2slb"
+            frameborder="0"
+            style="border: 0"
+            allowfullscreen=""
+            aria-hidden="false"
+            tabindex="0"
+          >
+          </iframe>
+        </div>
+      </div>
+    </footer>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>

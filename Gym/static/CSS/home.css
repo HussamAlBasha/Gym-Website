@@ -1,0 +1,335 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* Ensures padding is included in the width */
+}
+
+:root {
+    --primary-color: #e47a2e;
+    --accent-color: #000;
+    --background-color: #f4f4f4;
+    --additional-color: #2980b9;
+    --hover-effect: #ff5722;
+    --text-color: #000;
+    --text-hover-color: #fff;
+    --slogan-text-color: var(--primary-color);
+    --footer-background-color: var(--accent-color);
+    --footer-text-color: #fff;
+    --link-hover-color: #e47a2e;
+}
+
+/* Body Styling */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Arial", sans-serif;
+    background: var(--background-color);
+    /* Background color is now neutral */
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header Styling */
+.header {
+    width: 100%;
+    /* Ensures header covers the full width */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    background: var(--primary-color);
+    /* Header has a solid background */
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    /* Fixes z-index stacking context */
+    z-index: 2;
+    /* Ensures header is above the pseudo-element */
+}
+
+.header .logo {
+    display: flex;
+    align-items: center;
+    animation: logo-entry 1s ease forwards;
+}
+
+@keyframes logo-entry {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    80% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.header img {
+    height: 150px;
+    transition: transform 0.3s ease;
+}
+
+.header img:hover {
+    transform: scale(1.05);
+}
+
+/* Navigation Styling */
+.navigation {
+    display: flex;
+    list-style: none;
+    padding-left: 0;
+}
+
+.navigation li {
+    padding: 0 1rem;
+    position: relative;
+}
+
+.navigation a {
+    text-decoration: none;
+    color: white;
+    text-transform: uppercase;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.navigation a::after {
+    content: "";
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--background-color);
+    transition: transform 0.3s ease;
+    transform: scaleX(0);
+    transform-origin: right;
+}
+
+.navigation a:hover::after,
+.navigation a:focus::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+/* Main Content Styling */
+.main-content {
+    width: 100%;
+    flex: 1;
+    /* Ensures it fills the space between header and footer */
+    background: linear-gradient(to bottom, var(--primary-color), var(--footer-background-color));
+    /* Gradient is now applied here */
+    z-index: 1;
+    /* Lower z-index than header and footer */
+}
+
+/* Banner Styling */
+.banner {
+    width: 100%;
+    height: 300px;
+    background-image: url("../images/Banner.png");
+    background-size: cover;
+    background-position: center;
+    transition: opacity 0.5s ease;
+}
+
+.banner:hover {
+    opacity: 0.8;
+}
+
+/* Slogan Styling */
+.slogan {
+    text-align: center;
+    font-size: 2em;
+    color: var(--slogan-text-color);
+    margin: 20px 0;
+}
+
+/* Card Container Styling */
+.card-container {
+    display: flex;
+    justify-content: space-around;
+    margin: 40px auto;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.card {
+    flex-basis: calc(100% / 3 - 20px);
+    box-sizing: border-box;
+    margin: 10px;
+    padding: 20px;
+    background-color: rgba(211, 211, 211, 0.9);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-container a {
+    text-decoration: none;
+}
+.card:before {
+    content: "";
+    position: absolute;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--primary-color);
+    transition: top 0.5s ease;
+    z-index: 0;
+}
+
+.card:hover:before {
+    top: 0;
+}
+
+.card * {
+    position: relative;
+    z-index: 1;
+}
+
+.card h3,
+.card p {
+    color: var(--text-color);
+    transition: color 0.5s ease;
+}
+
+.card:hover h3,
+.card:hover p {
+    color: var(--text-hover-color);
+}
+
+.footer {
+    width: 100%;
+    /* Ensures footer covers the full width */
+    background-color: var(--footer-background-color);
+    /* Footer has a solid background */
+    color: var(--footer-text-color);
+    padding: 40px 20px;
+    font-size: 0.9rem;
+    position: relative;
+    /* Fixes z-index stacking context */
+    z-index: 2;
+    /* Ensures footer is above the pseudo-element */
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 250px;
+    margin: 10px 0;
+}
+
+.footer-section h3 {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.footer-section h3:after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 50px;
+    height: 2px;
+    background-color: var(--link-hover-color);
+}
+
+.social-links {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.social-links li {
+    margin-right: 20px;
+}
+
+.social-links a {
+    text-decoration: none;
+    color: var(--footer-text-color);
+    font-size: 1.4rem;
+    /* Adjust font size as needed */
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: var(--link-hover-color);
+}
+
+.social-links i {
+    margin-right: 8px;
+}
+
+.contact-info {
+    margin-bottom: 20px;
+}
+
+.contact-info p {
+    margin: 5px 0;
+}
+
+.google-map {
+    width: 100%;
+    height: 200px;
+    border: none;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 1024px) {
+    .card {
+        flex-basis: calc(100% / 2 - 20px);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .header {
+        flex-direction: column;
+    }
+
+    .navigation {
+        margin-top: 1rem;
+    }
+
+    .card-container {
+        flex-direction: column;
+    }
+
+    .card {
+        flex-basis: 90%;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-section {
+        max-width: 340px;
+    }
+}

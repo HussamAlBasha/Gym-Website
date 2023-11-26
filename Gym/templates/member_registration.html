@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='CSS/home.css') }}"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <title>Member Registration - Fit Fusion Gym</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+      }
+
+      .registration-section {
+        max-width: 400px;
+        margin: 20px auto;
+        padding: 20px;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .registration-form label {
+        display: block;
+        margin-top: 10px;
+      }
+
+      .registration-form input,
+      .registration-form select {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+
+      .registration-form input[type="submit"] {
+        background-color: #e47a2e;
+        color: white;
+        border: none;
+        padding: 10px;
+        margin-top: 20px;
+        cursor: pointer;
+      }
+
+      .registration-form input[type="submit"]:hover {
+        background-color: #ff5722;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header Section -->
+    <header class="header">
+      <div class="logo">
+        <img
+          src="{{ url_for('static', filename='images/logo.jpg') }}"
+          alt="Fit Fusion Logo"
+        />
+      </div>
+      <nav>
+        <ul class="navigation">
+          <li><a href="/">Home</a></li>
+          <li><a href="about">About Us</a></li>
+          <li>Member Registration</li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Main Content Section -->
+    <div class="main-content">
+      <!-- Registration Form Section -->
+      <div class="registration-section">
+        <form
+          action="{{ url_for('member_registration') }}"
+          method="post"
+          class="registration-form"
+        >
+          <label for="m_phone_num">Phone Number:</label>
+          <input type="text" id="m_phone_num" name="m_phone_num" required />
+
+          <label for="m_email">Email:</label>
+          <input type="email" id="m_email" name="m_email" required />
+
+          <label for="m_name">Full Name:</label>
+          <input type="text" id="m_name" name="m_name" required />
+
+          <label for="m_gender">Gender:</label>
+          <select id="m_gender" name="m_gender" required>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+
+          <label for="m_locker_num">Locker Number:</label>
+          <input type="number" id="m_locker_num" name="m_locker_num" />
+
+          <label for="m_dob">Date of Birth:</label>
+          <input type="date" id="m_dob" name="m_dob" required />
+
+          <label for="m_state">State:</label>
+          <input type="text" id="m_state" name="m_state" required />
+
+          <label for="m_city">City:</label>
+          <input type="text" id="m_city" name="m_city" required />
+
+          <label for="m_street">Street:</label>
+          <input type="text" id="m_street" name="m_street" required />
+
+          <input type="submit" value="Register" />
+        </form>
+      </div>
+    </div>
+    <!-- Toast Notification Container -->
+    <div id="toast-container"></div>
+    <!-- Footer Section -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Connect With Us</h3>
+          <ul class="social-links">
+            <li>
+              <a href="https://www.facebook.com/" target="_blank"
+                ><img
+                  src="{{ url_for('static', filename='images/facebook-logo.png') }}"
+                  alt="Facebook"
+              /></a>
+            </li>
+
+            <li>
+              <a href="https://www.instagram.com/" target="_blank"
+                ><img
+                  src="{{ url_for('static', filename='images/instagram-logo.png') }}"
+                  alt="Instagram"
+              /></a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Contact Information</h3>
+          <div class="contact-info">
+            <p>Email: info@fitfusion.com</p>
+            <p>Phone: 123-456-7890</p>
+          </div>
+        </div>
+        <div class="footer-section google-map">
+          <h3>Find Us</h3>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3311.617433633093!2d35.47981297424533!3d33.89950532578244!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151f17ba8ada0c2d%3A0x4de124146ca8879!2sAUB%20Main%20Gate!5e0!3m2!1sen!2slb!4v1683103233773!5m2!1sen!2slb"
+            frameborder="0"
+            style="border: 0"
+            allowfullscreen=""
+            aria-hidden="false"
+            tabindex="0"
+          >
+          </iframe>
+        </div>
+      </div>
+    </footer>
+
+    <!-- JavaScript to handle form submission and show toast -->
+    <script>
+      function showToast(message, success = true) {
+        var container = document.getElementById("toast-container");
+        var toast = document.createElement("div");
+        toast.style.marginBottom = "10px";
+        toast.style.padding = "10px";
+        toast.style.color = "white";
+        toast.style.backgroundColor = success ? "green" : "red";
+        toast.innerText = message;
+
+        container.appendChild(toast);
+
+        // Remove the toast after 5 seconds
+        setTimeout(function () {
+          container.removeChild(toast);
+        }, 5000);
+      }
+
+      $(document).ready(function () {
+        $(".registration-form").on("submit", function (e) {
+          e.preventDefault(); // Prevent the default form submit
+          $.ajax({
+            type: $(this).attr("method"),
+            url: $(this).attr("action"),
+            data: $(this).serialize(),
+            success: function (response) {
+              // Show toast message based on the response
+              showToast(response.message, response.success);
+            },
+            error: function () {
+              showToast("There was an error processing your request.", false);
+            },
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

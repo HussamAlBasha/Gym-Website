@@ -1,13 +1,13 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, jsonify, redirect, url_for
 import psycopg2
 from psycopg2 import Error as PsycopgError
 
 # Connect to the database
 conn = psycopg2.connect(
     host="localhost",
-    database="GYM",
+    database="Gym",
     user="postgres",
-    password="new_password"
+    password="DataBase123!"
 )
 cursor = conn.cursor()
 
@@ -624,6 +624,177 @@ def update_product_quantity():
             return render_template('update_product_quantity.html', success=False, error_message=str(e))
 
     return render_template('update_product_quantity.html', success=None)
+
+### Lewaa ###
+@app.route('/member-registration', methods=['GET', 'POST'])
+def member_registration():
+    if request.method == 'POST':
+        # Create a database connection
+        cursor = conn.cursor()
+
+        try:
+            # Get the maximum m_id
+            cursor.execute("SELECT MAX(m_id) FROM public.\"Member\"")
+            max_id_result = cursor.fetchone()
+            next_id = max_id_result[0] + 1 if max_id_result[0] else 1
+
+            # Get form data
+            m_phone_num = request.form['m_phone_num']
+            m_email = request.form['m_email']
+            m_name = request.form['m_name']
+            m_gender = request.form['m_gender']
+            m_locker_num = request.form['m_locker_num']
+            m_dob = request.form['m_dob']
+            m_state = request.form['m_state']
+            m_city = request.form['m_city']
+            m_street = request.form['m_street']
+            
+            # Prepare the INSERT statement with the new ID
+            insert_query = """
+            INSERT INTO public."Member" 
+            (m_id, m_phone_num, m_email, m_name, m_gender, m_locker_num, m_dob, m_state, m_city, m_street) 
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            """
+            
+            # Execute the query with the new ID
+            cursor.execute(insert_query, (next_id, m_phone_num, m_email, m_name, m_gender, m_locker_num, m_dob, m_state, m_city, m_street))
+
+            # Commit the transaction
+            conn.commit()
+
+            # Return a JSON response
+            return jsonify(success=True, message="Registration successful!")
+
+        except psycopg2.Error as e:
+            # Rollback the transaction on error
+            conn.rollback()
+            return jsonify(success=False, message=f"An error occurred: {e.pgerror}")
+    
+
+    # Render the registration form template if method is GET
+    return render_template('member_registration.html')
+
+
+
+@app.route('/member-page', methods=['GET', 'POST'])
+def member_page():
+    # Always fetch membership types
+    cursor.execute("SELECT * FROM public.\"Membership\" ORDER BY mp_name ASC;")
+    membership_types = cursor.fetchall()
+    
+    member_info = None  # Default to None if no POST request has been made
+
+    # When form is submitted
+    if request.method == 'POST':
+        member_name = request.form['member_name']  # Get the member name from the form
+        try:
+            # Query to find member information based on the input name
+            cursor.execute("""
+                SELECT * FROM public."Member"
+                WHERE m_name ILIKE %s;
+            """, ('%' + member_name + '%',))
+            member_info = cursor.fetchall()
+        except psycopg2.Error as e:
+            print(f"An error occurred: {e}")
+            member_info = []  # Empty list if there's an error
+
+    # Render the page with the fetched data
+    return render_template('member-page.html', 
+                           membership_types=membership_types, 
+                           member_info=member_info)
+
+@app.route('/update-member', methods=['GET', 'POST'])
+def update_member():
+    if request.method == 'POST':
+        member_id = request.form['m_id']
+        return redirect(url_for('update_member_info', member_id=member_id))
+    return render_template('update_member_search.html')
+
+@app.route('/update-member-info/<int:member_id>', methods=['GET', 'POST'])
+def update_member_info(member_id):
+    # Establish a new cursor for each request
+    cursor = conn.cursor()
+    
+    if request.method == 'POST':
+        # Extract data from form submission
+        m_phone_num = request.form['m_phone_num']
+        m_email = request.form['m_email']
+        m_name = request.form['m_name']
+        m_gender = request.form['m_gender']
+        m_locker_num = request.form.get('m_locker_num', None)  # Use get to avoid KeyError if not found
+        m_dob = request.form['m_dob']
+        m_state = request.form['m_state']
+        m_city = request.form['m_city']
+        m_street = request.form['m_street']
+        
+        # Prepare the UPDATE statement
+        update_query = """
+        UPDATE public."Member" 
+        SET m_phone_num=%s, m_email=%s, m_name=%s, m_gender=%s, m_locker_num=%s,
+            m_dob=%s, m_state=%s, m_city=%s, m_street=%s
+        WHERE m_id=%s
+        """
+        # Execute the UPDATE statement
+        cursor.execute(update_query, (m_phone_num, m_email, m_name, m_gender, m_locker_num, m_dob, m_state, m_city, m_street, member_id))
+        conn.commit()
+        
+        # Close the cursor
+        cursor.close()
+        
+        # Redirect after post or show a success message
+        return redirect(url_for('update_member_info', member_id=member_id, success=True))
+    
+    # Handle GET request
+    try:
+        # Retrieve member's current information
+        cursor.execute("SELECT * FROM public.\"Member\" WHERE m_id = %s", (member_id,))
+        member_info = cursor.fetchone()
+        
+        # Check if member_info was found
+        if member_info:
+            # Render the update form with the member's information
+            return render_template('update_member_info.html', member_info=member_info)
+        else:
+            # If no member was found with the ID, handle the error
+            return "No member found with the provided ID", 404
+    except psycopg2.Error as e:
+        # Handle any database errors
+        return jsonify(success=False, message=f"An error occurred: {e.pgerror}")
+
+@app.route('/submit-feedback', methods=['GET', 'POST'])
+def submit_feedback():
+    if request.method == 'POST':
+        # Get the member ID and feedback text from the form
+        f_m_id_fk = request.form['f_m_id_fk']
+        feedback_text = request.form['feedback_text']
+        
+        # Connect to the database
+        cursor = conn.cursor()
+        
+        # Fetch the maximum feedback_id to increment it
+        cursor.execute("SELECT MAX(feedback_id) FROM public.\"Feedback\"")
+        max_id_result = cursor.fetchone()
+        next_feedback_id = max_id_result[0] + 1 if max_id_result[0] else 1
+        
+        # Insert new feedback
+        insert_query = """
+        INSERT INTO public."Feedback" (feedback_id, f_m_id_fk, feedback_text, feedback_date, resolution_status)
+        VALUES (%s, %s, %s, CURRENT_DATE, 'Pending')
+        """
+        cursor.execute(insert_query, (next_feedback_id, f_m_id_fk, feedback_text))
+        conn.commit()
+        cursor.close()
+        
+        # Redirect to a confirmation page or back to the form
+        return jsonify(success=True, message="Feedback submitted successfully")
+
+    # Render the feedback form template if method is GET
+    return render_template('feedback_form.html')
+
+
+@app.route('/about')
+def about():
+    return render_template('about_us.html') 
 
 if __name__ == '__main__':
     app.run(debug=True)
