@@ -530,19 +530,29 @@ def All():
 def update_trainer_salaries():
     if request.method == 'POST':
         try:
+            percentage = request.form.get('percentage', type=float)
+            operation = request.form.get('operation')
+
+            if operation == 'increase':
+                multiplier = 1 + percentage / 100
+            elif operation == 'decrease':
+                multiplier = 1 - percentage / 100
+            else:
+                raise ValueError("Invalid operation")
+
             with conn.cursor() as cursor:
-                # Update trainer salaries by 10%
-                cursor.execute("UPDATE \"Trainer\" SET t_salary = t_salary * 1.1;")
-                
+                # Update trainer salaries based on the specified percentage and operation
+                cursor.execute(f"UPDATE \"Trainer\" SET t_salary = t_salary * {multiplier};")
+
                 # Commit the transaction
                 conn.commit()
-                
+
                 # Set a flag for successful update
                 update_success = True
                 return render_template('update_trainer_salaries.html', update_success=update_success)
 
-        except psycopg2.Error as e:
-            # Handle database errors
+        except (psycopg2.Error, ValueError) as e:
+            # Handle database errors or invalid input
             return render_template('error.html', error_message=f"An unexpected error occurred: {e}")
 
     return render_template('update_trainer_salaries.html', update_success=False)
