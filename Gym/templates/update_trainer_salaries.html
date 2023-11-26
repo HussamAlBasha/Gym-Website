@@ -6,13 +6,17 @@
     <h1>Update Trainer Salaries</h1>
     
     <form action="/admin/update_trainer_salaries" method="POST">
-        <p>Increase the salary of all trainers by 10% because of inflation: </p>
-        <input class="custom-button" type="submit" value="Update Salaries">
+        <h2>Increase the salary of all trainers by 10% because of inflation: </h2>
+        <input class="btn btn-secondary" type="submit" value="Update Salaries">
     </form>
 
     {% if update_success %}
         <p style="color: green;">Salaries updated successfully!</p>
     {% endif %}
 
+
+    <div class="card-container">
     <button class="custom-button" onclick="location.href='/admin'">Back</button>
+    </div>
+    
 {% endblock %}

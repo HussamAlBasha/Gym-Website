@@ -7,22 +7,25 @@
     <h1>Get Trainer Information</h1>
     <td>	 
         <form action="" method="POST">
-            <br>  Enter a Trainer ID: <br>
+            <h2>Enter a Trainer ID:</h2>
+            
             <br><input type="number" name="pid" min="1" required><br>
-            <br><input class="custom-button" type="submit" value="Submit ID"><br>
+            <br><input class="btn btn-secondary" type="submit" value="Submit ID"><br>
         </form> 
     </td>
 
     <ul>
         <br>
-        <li> The name of the trainer: <span style="color: #2980b9;">{{t_name}}</span></li><br>
-        <li> The phone number of the trainer: <span style="color: #2980b9;">{{t_phone_num}}</span></li><br>
-        <li> The Email of the trainer: <span style="color: #2980b9;">{{t_email}}</span></li><br>
-        <li> The date of birth of the trainer: <span style="color: #2980b9;">{{t_dob}}</span></li><br>
-        <li> The salary of the trainer: <span style="color: #2980b9;">{{t_salary}}</span></li><br>
+        <li > The name of the trainer: <span style="color: white;">{{t_name}}</span></li><br>
+        <li > The phone number of the trainer: <span style="color: white;">{{t_phone_num}}</span></li><br>
+        <li > The Email of the trainer: <span style="color: white;">{{t_email}}</span></li><br>
+        <li > The date of birth of the trainer: <span style="color: white;">{{t_dob}}</span></li><br>
+        <li > The salary of the trainer: <span style="color: white;">{{t_salary}}</span></li><br>
         
     </ul>  
 
+    <div class="card-container">
     <button class="custom-button" onclick="location.href='/trainer'">Back</button>
+    </div>
 
 {% endblock %}

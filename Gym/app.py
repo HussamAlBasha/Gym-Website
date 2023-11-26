@@ -5,9 +5,9 @@ from psycopg2 import Error as PsycopgError
 # Connect to the database
 conn = psycopg2.connect(
     host="localhost",
-    database="Gym",
+    database="GYM",
     user="postgres",
-    password="DataBase123!"
+    password="new_password"
 )
 cursor = conn.cursor()
 
@@ -17,6 +17,10 @@ app = Flask(__name__)
 @app.route("/")
 def home(): 
     return render_template("home.html")
+
+@app.route("/admin/complex")
+def complex(): 
+    return render_template("complex.html")
 
 @app.route("/trainer")
 def trainer():
@@ -100,7 +104,7 @@ def classes_given():
 ##########################################################################################################################
 #  Complex Queries  
     
-@app.route("/cq1", methods = ["Get", "Post"])
+@app.route("/admin/complex/cq1", methods = ["Get", "Post"])
 def cq1():
 
     cursor.execute('SELECT t_id, t_name	FROM "Trainer";')
@@ -130,7 +134,7 @@ def cq1():
     else:
         return render_template("cq1.html", trainers=trainers)
 
-@app.route("/cq2", methods = ["Get"])
+@app.route("/admin/complex/cq2", methods = ["Get"])
 def cq2():
 
     cq2 = """
@@ -151,7 +155,7 @@ def cq2():
         return render_template("cq2.html")
     return render_template("cq2.html", rows=rows)
 
-@app.route("/cq3", methods = ["Get"])
+@app.route("/admin/complex/cq3", methods = ["Get"])
 def cq3():
 
     cq3 = """
@@ -173,7 +177,7 @@ def cq3():
         return render_template("cq3.html")
     return render_template("cq3.html", rows=rows)
 
-@app.route("/cq4", methods = ["Get"])
+@app.route("/admin/complex/cq4", methods = ["Get"])
 def cq4():
 
     cq4 = """
@@ -199,7 +203,7 @@ def cq4():
         return render_template("cq4.html")  
     return render_template("cq4.html", rows=rows)
 
-@app.route("/cq5", methods = ["Get"])
+@app.route("/admin/complex/cq5", methods = ["Get"])
 def cq5():
 
     cq5 = """
@@ -221,7 +225,7 @@ def cq5():
         return render_template("cq5.html")  
     return render_template("cq5.html", rows=rows)
         
-@app.route("/cq6", methods = ["Get"])
+@app.route("/admin/complex/cq6", methods = ["Get"])
 def cq6():
 
     cq6 = """
@@ -254,7 +258,7 @@ def cq6():
         return render_template("cq6.html")   
     return render_template("cq6.html", rows=rows)
 
-@app.route("/cq7", methods = ["Get"])
+@app.route("/admin/complex/cq7", methods = ["Get"])
 def cq7():
 
     cq7 = """
@@ -280,7 +284,7 @@ def cq7():
         return render_template("cq7.html")  
     return render_template("cq7.html", rows=rows)
 
-@app.route("/cq8", methods = ["Get"])
+@app.route("/admin/complex/cq8", methods = ["Get"])
 def cq8():
 
     cq8 = """
@@ -315,7 +319,7 @@ def cq8():
         return render_template("cq8.html")
     return render_template("cq8.html", rows=rows)
 
-@app.route("/cq9", methods = ["Get"])
+@app.route("/admin/complex/cq9", methods = ["Get"])
 def cq9():
 
     cq9 = """
@@ -343,7 +347,7 @@ def cq9():
         return render_template("cq9.html")  
     return render_template("cq9.html", rows=rows)
 
-@app.route("/cq10", methods = ["Get"])
+@app.route("/admin/complex/cq10", methods = ["Get"])
 def cq10():
 
     cq10 = """
@@ -387,7 +391,7 @@ def cq10():
     return render_template("cq10.html", rows=rows)
 
 
-@app.route("/cq11", methods = ["Get"])
+@app.route("/admin/complex/cq11", methods = ["Get"])
 def cq11():
 
     cq11 = """
@@ -410,7 +414,7 @@ def cq11():
     return render_template("cq11.html", rows=rows)
 
 
-@app.route("/cq12", methods = ["Get"])
+@app.route("/admin/complex/cq12", methods = ["Get"])
 def cq12():
 
     cq12 = """
