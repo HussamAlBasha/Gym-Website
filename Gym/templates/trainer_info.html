@@ -5,25 +5,24 @@
 {% block content %}
     <br>
     <h1>Get Trainer Information</h1>
+    <br>
+    <div style="text-align: center;"> 
     <td>	 
         <form action="" method="POST">
-            <h2>Enter a Trainer ID:</h2>
-            
-            <br><input type="number" name="pid" min="1" required><br>
+            <label><h2 style="color:black">Enter a Trainer ID:</h2></label>
+            <input type="number" name="pid" min="1" required style="border-radius:8px; font-size: 20px;"><br>
             <br><input class="btn btn-secondary" type="submit" value="Submit ID"><br>
         </form> 
     </td>
 
-    <ul>
         <br>
-        <li > The name of the trainer: <span style="color: white;">{{t_name}}</span></li><br>
-        <li > The phone number of the trainer: <span style="color: white;">{{t_phone_num}}</span></li><br>
-        <li > The Email of the trainer: <span style="color: white;">{{t_email}}</span></li><br>
-        <li > The date of birth of the trainer: <span style="color: white;">{{t_dob}}</span></li><br>
-        <li > The salary of the trainer: <span style="color: white;">{{t_salary}}</span></li><br>
-        
-    </ul>  
-
+        <h2 > The name of the trainer: <span style="color: black;">{{t_name}}</span></h2><br>
+        <h2 > The phone number of the trainer: <span style="color: black;">{{t_phone_num}}</span></h2><br>
+        <h2 > The Email of the trainer: <span style="color: black;">{{t_email}}</span></h2><br>
+        <h2 > The date of birth of the trainer: <span style="color: black;">{{t_dob}}</span></h2><br>
+        <h2 > The salary of the trainer: <span style="color: black;">{{t_salary}}</span></h2><br>
+      
+    </div>
     <div class="card-container">
     <button class="custom-button" onclick="location.href='/trainer'">Back</button>
     </div>

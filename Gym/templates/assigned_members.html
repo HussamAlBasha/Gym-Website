@@ -4,27 +4,29 @@
 
 {% block content %}
 <br>
-        <h1>Check the Members Assigned to a chosen Trainer</h1>
+<h1>Check the Members Assigned to a chosen Trainer</h1>
+<br>
+<div style="text-align: center;"> 
 
-        <td>	 
-            <form action="" method="POST">
-                <br>
-                <h2>Enter a Trainer ID:</h2>
-                <br><input type="number" name="pid" min="1" required><br>
-                <br><input class="btn btn-secondary" type="submit" value="Submit ID"><br>
-            </form> 
-        </td>
+<td>	 
+    <form action="" method="POST">
         <br>
-        <h2>Members Assigned to the chosen Trainer</h2>
+        <label><h2 style="color:black">Enter a Trainer ID:</h2></label>
+        <input type="number" name="pid" min="1" required style="border-radius:8px; font-size: 20px;"><br>
+        <br><input class="btn btn-secondary" type="submit" value="Submit ID"><br>
+    </form> 
+</td>
+<br>
+<h2>Members Assigned to the chosen Trainer</h2>
 
-        <ul>
-            {% for member_name in members_list %}
-                <li>{{ member_name }}</li>
-            {% endfor %}
-        </ul>
 
-        <div class="card-container">
-        <button class="custom-button" onclick="location.href='/trainer'">Back</button>
-        </div>
-    
+{% for member_name in members_list %}
+    <h2 style="color:black">{{ member_name }}</h2>
+{% endfor %}
+
+</div>
+<div class="card-container">
+<button class="custom-button" onclick="location.href='/trainer'">Back</button>
+</div>
+
 {% endblock %}

@@ -5,19 +5,20 @@
     <div style="text-align: center;"> <!-- Add a container for center alignment -->
         <br>
         <h1>Add a new Purchase</h1>
+        <br>
         <form action="/admin/BuyingActions/AddPurchase" method="POST">
-            <label for="b_m_id_fk">Member ID:</label>
+            <label for="b_m_id_fk"><h2 style="color:black">Member ID:</h2></label>
             <input type="number" name="b_m_id_fk" required style="border-radius: 8px; margin-bottom: 10px;"><br>
 
-            <label for="barcode_fk">Barcode:</label>
+            <label for="barcode_fk"><h2 style="color:black">Barcode:</h2></label>
             <input type="number" name="barcode_fk" required style="border-radius: 8px; margin-bottom: 10px;"><br>
 
-            <label for="quantity">Quantity:</label>
+            <label for="quantity"><h2 style="color:black">Quantity:</h2></label>
             <input type="number" name="quantity" required style="border-radius: 8px; margin-bottom: 10px;"><br>
 
-            <label for="purchase_date">Purchase Date:</label>
-            <input type="date" name="purchase_date" required style="border-radius: 8px; margin-bottom: 10px;"><br>
-
+            <label for="purchase_date"><h2 style="color:black">Purchase Date:</h2></label>
+            <input type="date" name="purchase_date" required style="border-radius: 8px; margin-bottom: 10px; font-size: 25px;"><br>
+            <br>
             <input class="custom-button" type="submit" value="Add Purchase" style="border-radius: 8px;">
         </form>
 

@@ -4,12 +4,14 @@
 
 {% block content %}
 <br>
-    <h1>Check the classes that are given by your favorite trainer</h1>
+<h1>Check the classes that are given by your favorite trainer</h1>
+<br>
+<div style="text-align: center;"> 
 
     <td>	 
         <form action="" method="POST">
-            <h2>Enter a Trainer ID: </h2>
-            <br><input type="number" name="pid" min="1" required><br>
+            <label><h2 style="color:black">Enter a Trainer ID:</h2></label>
+            <input type="number" name="pid" min="1" required style="border-radius:8px; font-size: 20px;"><br>
             <br><input class="custom-button" type="submit" value="Submit ID"><br>
         </form> 
     </td>
@@ -17,6 +19,7 @@
 
     <div class="main">
         <h2>Classes Given by the Chosen Trainer</h2>
+        <br>
 
         <div class="custom-table">
             <table class="custom-table">
@@ -47,6 +50,8 @@
             </table>
         </div>
     </div>
+
+</div>
 
     <div class="card-container">
     <button class="custom-button" onclick="location.href='/trainer'">Back</button>

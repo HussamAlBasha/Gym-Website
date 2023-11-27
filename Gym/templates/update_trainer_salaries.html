@@ -5,16 +5,17 @@
     <div style="text-align: center;"> <!-- Add a container for center alignment -->
         <br>
         <h1>Update Trainer Salaries</h1>
+        <br>
         
         <form action="/admin/update_trainer_salaries" method="POST">
             <div style="margin-bottom: 20px;"> <!-- Adjust the margin-bottom value as needed -->
-                <label for="percentage">Percentage:</label>
-                <input type="number" name="percentage" id="percentage" min="0" required style="border-radius: 8px;">
+                <label for="percentage"><h2 style="color:black">Percentage:</h2></label>
+                <input type="number" name="percentage" id="percentage" min="0" required style="border-radius: 8px; font-size: 20px;">
             </div>
             
             <div style="margin-bottom: 5px;"> <!-- Adjust the margin-bottom value as needed -->
-                <label for="operation">Operation:</label>
-                <select name="operation" id="operation" required style="border-radius: 8px;">
+                <label for="operation"><h2 style="color:black">Operation:</h2></label>
+                <select name="operation" id="operation" required style="border-radius: 8px; font-size: 25px;">
                     <option value="increase">Increase</option>
                     <option value="decrease">Decrease</option>
                 </select>
@@ -28,8 +29,10 @@
             <p style="color: green;">Salaries updated successfully!</p>
         {% endif %}
 
-        <div style="margin-top: 20px;"> <!-- Adjust the margin-top value as needed -->
-            <button class="custom-button" onclick="location.href='/admin'" style="border-radius: 8px;">Back</button>
-        </div>
     </div>
+
+    <div class="card-container">
+        <button class="custom-button" onclick="location.href='/admin'">Back</button>
+    </div>
+
 {% endblock %}
