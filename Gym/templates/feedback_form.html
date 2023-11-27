@@ -124,15 +124,23 @@
       $(document).ready(function () {
         var successToast = $("#successToast");
         var errorToast = $("#errorToast");
-
+    
         $("#feedbackForm").on("submit", function (event) {
           event.preventDefault();
-          // On success:
-          successToast.toast("show");
-          // On error:
-          //errorToast.toast("show");
+    
+          // Simulated logic for success and error scenarios
+          var isSuccess = true; // Replace with your actual success condition
+    
+          if (isSuccess) {
+            // On success:
+            successToast.toast("show");
+          } else {
+            // On error:
+            errorToast.toast("show");
+          }
         });
       });
     </script>
+    
   </body>
 </html>
