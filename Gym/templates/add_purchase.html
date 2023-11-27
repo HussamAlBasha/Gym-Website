@@ -2,26 +2,27 @@
 {% block title %}Add Purchase{% endblock %}
 
 {% block content %}
-    <br>
-    <h1>Add a new Purchase</h1>
-    <form action="/admin/BuyingActions/AddPurchase" method="POST">
-        <label for="b_m_id_fk">Member ID:</label>
-        <input type="number" name="b_m_id_fk" required><br>
+    <div style="text-align: center;"> <!-- Add a container for center alignment -->
+        <br>
+        <h1>Add a new Purchase</h1>
+        <form action="/admin/BuyingActions/AddPurchase" method="POST">
+            <label for="b_m_id_fk">Member ID:</label>
+            <input type="number" name="b_m_id_fk" required style="border-radius: 8px; margin-bottom: 10px;"><br>
 
-        <label for="barcode_fk">Barcode:</label>
-        <input type="number" name="barcode_fk" required><br>
+            <label for="barcode_fk">Barcode:</label>
+            <input type="number" name="barcode_fk" required style="border-radius: 8px; margin-bottom: 10px;"><br>
 
-        <label for="quantity">Quantity:</label>
-        <input type="number" name="quantity" required><br>
+            <label for="quantity">Quantity:</label>
+            <input type="number" name="quantity" required style="border-radius: 8px; margin-bottom: 10px;"><br>
 
-        <label for="purchase_date">Purchase Date:</label>
-        <input type="date" name="purchase_date" required><br>
+            <label for="purchase_date">Purchase Date:</label>
+            <input type="date" name="purchase_date" required style="border-radius: 8px; margin-bottom: 10px;"><br>
 
-        <input class="custom-button" type="submit" value="Add Purchase">
-    </form>
+            <input class="custom-button" type="submit" value="Add Purchase" style="border-radius: 8px;">
+        </form>
 
-    <div class="card-container">
-    <button class="custom-button" onclick="location.href='/admin/BuyingActions'">Back</button>
+        <div class="card-container">
+            <button class="custom-button" onclick="location.href='/admin/BuyingActions'" style="border-radius: 8px;">Back</button>
+        </div>
     </div>
-    
 {% endblock %}

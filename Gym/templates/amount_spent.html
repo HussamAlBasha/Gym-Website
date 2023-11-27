@@ -2,25 +2,24 @@
 {% block title %}Amount Spent{% endblock %}
 
 {% block content %}
-    <br>
-    <h1>Get the total amount spent</h1>
-    <td>	 
+    <div style="text-align: center;"> <!-- Add a container for center alignment -->
+        <br>
+        <h1>Get the total amount spent</h1>
         <form action="" method="POST">
-            <br>  Enter a Member ID: <br>
-            <br><input type="number" name="mid" min="1" required><br>
-            <br><input class="custom-button" type="submit" value="Submit ID"><br>
-        </form> 
-    </td>
+            <br>Enter a Member ID:<br>
+            <br><input type="number" name="mid" min="1" required style="border-radius: 8px; margin-bottom: 10px;"><br>
+            <br><input class="custom-button" type="submit" value="Submit ID" style="border-radius: 8px;"><br>
+        </form>
 
-    {% if total_amount is not none %}
-        <ul>
-            <br>
-            <li> Total Purchase Amount: <span style="color: #2980b9;">{{ total_amount }}</span></li><br>
-        </ul>
-    {% endif %}
+        {% if total_amount is not none %}
+            <ul>
+                <br>
+                <li>Total Purchase Amount: <span style="color: #2980b9;">{{ total_amount }}</span></li><br>
+            </ul>
+        {% endif %}
 
-    <div class="card-container">
-    <button class="custom-button" onclick="location.href='/admin/BuyingActions'">Back</button>
+        <div class="card-container">
+            <button class="custom-button" onclick="location.href='/admin/BuyingActions'" style="border-radius: 8px;">Back</button>
+        </div>
     </div>
- 
 {% endblock %}

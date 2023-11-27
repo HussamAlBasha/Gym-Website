@@ -2,21 +2,34 @@
 {% block title %}Update Trainer Salaries{% endblock %}
 
 {% block content %}
-    <br>
-    <h1>Update Trainer Salaries</h1>
-    
-    <form action="/admin/update_trainer_salaries" method="POST">
-        <h2>Increase the salary of all trainers by 10% because of inflation: </h2>
-        <input class="btn btn-secondary" type="submit" value="Update Salaries">
-    </form>
+    <div style="text-align: center;"> <!-- Add a container for center alignment -->
+        <br>
+        <h1>Update Trainer Salaries</h1>
+        
+        <form action="/admin/update_trainer_salaries" method="POST">
+            <div style="margin-bottom: 20px;"> <!-- Adjust the margin-bottom value as needed -->
+                <label for="percentage">Percentage:</label>
+                <input type="number" name="percentage" id="percentage" min="0" required style="border-radius: 8px;">
+            </div>
+            
+            <div style="margin-bottom: 5px;"> <!-- Adjust the margin-bottom value as needed -->
+                <label for="operation">Operation:</label>
+                <select name="operation" id="operation" required style="border-radius: 8px;">
+                    <option value="increase">Increase</option>
+                    <option value="decrease">Decrease</option>
+                </select>
+            </div>
+            
+            <br>
+            <input class="custom-button" type="submit" value="Update Salaries" style="border-radius: 8px;">
+        </form>
 
-    {% if update_success %}
-        <p style="color: green;">Salaries updated successfully!</p>
-    {% endif %}
+        {% if update_success %}
+            <p style="color: green;">Salaries updated successfully!</p>
+        {% endif %}
 
-
-    <div class="card-container">
-    <button class="custom-button" onclick="location.href='/admin'">Back</button>
+        <div style="margin-top: 20px;"> <!-- Adjust the margin-top value as needed -->
+            <button class="custom-button" onclick="location.href='/admin'" style="border-radius: 8px;">Back</button>
+        </div>
     </div>
-    
 {% endblock %}
