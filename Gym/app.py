@@ -779,7 +779,7 @@ def update_member_info(member_id):
 def submit_feedback():
     if request.method == 'POST':
         # Get the member ID and feedback text from the form
-        f_m_id_fk = request.form['f_m_id_fk']
+        # f_m_id_fk = request.form['f_m_id_fk']
         feedback_text = request.form['feedback_text']
         
         # Connect to the database
@@ -795,12 +795,14 @@ def submit_feedback():
         INSERT INTO public."Feedback" (feedback_id, f_m_id_fk, feedback_text, feedback_date, resolution_status)
         VALUES (%s, %s, %s, CURRENT_DATE, 'Pending')
         """
-        cursor.execute(insert_query, (next_feedback_id, f_m_id_fk, feedback_text))
+        cursor.execute(insert_query, (next_feedback_id, None, feedback_text))
         conn.commit()
         cursor.close()
         
         # Redirect to a confirmation page or back to the form
-        return jsonify(success=True, message="Feedback submitted successfully")
+        # return jsonify(success=True, message="Feedback submitted successfully")
+        return render_template("Suc.html")
+    
 
     # Render the feedback form template if method is GET
     return render_template('feedback_form.html')
