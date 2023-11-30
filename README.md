@@ -11,5 +11,6 @@ conn = psycopg2.connect(
     user="your_user_name",
     password="your_password"
 )
+```
 To run the website, navigate to the directory where app.py exists. Run the following command in the terminal: python app.py
 Then navigate in your browser to:http://127.0.0.1:5000/ to view the website.
